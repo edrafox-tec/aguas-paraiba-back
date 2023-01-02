@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -17,10 +18,19 @@ class AuthController extends Controller
 
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
+        } else {
+            $colaborador = User::where('registration', $request->input('registration'))->first();
+            if ($colaborador->count() > 0) {
+                $array = array(
+                    "Auth"=>$this->respondWithToken($token),
+                    "User"=> $colaborador
+                );
+                return $array;
+            } else {
+                return 'Usuario ou senha incorretos!';
+            }
     }
+}
 
     /**
      * Get the token array structure.
