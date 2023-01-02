@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\sector;
 use GuzzleHttp\Exception\ClientException;
-
 use Illuminate\Http\Request;
 
-class Users extends Controller
+class SectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,21 +25,17 @@ class Users extends Controller
      */
     public function create(Request $request)
     {
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->registration = $request->input('registration');
-        $user->password = bcrypt($request->input('password'));
-        $user->function = $request->input('function');
-        $user->level = $request->input('level');
-        $user->id_sector = $request->input('id_sector');
+        $sector = new sector;
+        $sector->name = $request->input('name');
+        $sector->level = $request->input('level');
+        $sector->description = $request->input('description');
         try {
-            if($user->save()){
-                return $user;
+            if ($sector->save()) {
+                return $sector;
             };
         } catch (ClientException $e) {
-            return $e->getMessage();
+            return $e->getResponse();
         }
-
     }
 
     /**
@@ -51,33 +46,35 @@ class Users extends Controller
      */
     public function store($id, Request $request)
     {
-        $user = user::where('id', $id)->first();
-        if (!$user) {
-            return 'Nenhum user encontrado!';
+        $sector = sector::where('id', $id)->first();
+        if (!$sector) {
+            return response()->json([
+                'message' => 'Sector not found'
+            ], 404);
         } else {
-            return $user;
+            return $sector;
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\user  $user
+     * @param  \App\Models\sector  $sector
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $names = user::get();
-        return $names;
+        $sector = sector::get();
+        return $sector;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\user  $user
+     * @param  \App\Models\sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(sector $sector)
     {
         //
     }
@@ -86,36 +83,39 @@ class Users extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\user  $user
+     * @param  \App\Models\sector  $sector
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request)
     {
-        $user = user::findOrFail($id);
-        $user->name = $request->input('name');
-        $user->registration = $request->input('registration');
-        $user->password = bcrypt($request->input('password'));
-        $user->function = $request->input('function');
-        $user->level = $request->input('level');
-        $user->id_sector = $request->input('id_sector');
-        try {
-            if($user->save()){
-                return $user;
+        $sector = sector::find($id);
+        if (!$sector) {
+            return response()->json([
+                'message' => 'Sector not found'
+            ], 404);
+        } else {
+            $sector->name = $request->input('name');
+            $sector->level = $request->input('level');
+            $sector->description = $request->input('description');
+            try {
+                if ($sector->save()) {
+                    return $sector;
+                }
+            } catch (ClientException $e) {
+                return $e->getResponse();
             }
-        } catch (ClientException $e) {
-            return $e->getMessage();
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\user  $user
+     * @param  \App\Models\sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
-        $deletado = user::where('id', $id)->delete();
+        $deletado = sector::where('id', $id)->delete();
         if ($deletado) {
             return 'Deletado com sucesso!';
         } else {
