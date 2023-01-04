@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\answer;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -22,9 +23,19 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $answer = new answer;
+        $answer->question = $request->input('answer');
+        $answer->description = $request->input('description');
+        $answer->id_question = $request->input('id_question');
+        try {
+            if($answer->save()){
+                return $answer;
+            };
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -33,9 +44,16 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+        $answer = answer::where('id', $id)->first();
+        if (!$answer) {
+            return response()->json([
+                'message' => 'answer not found'
+            ], 404);
+        } else {
+            return $answer;
+        }
     }
 
     /**
@@ -44,9 +62,10 @@ class AnswerController extends Controller
      * @param  \App\Models\answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function show(answer $answer)
+    public function show()
     {
-        //
+        $answer = answer::get();
+        return $answer;
     }
 
     /**
@@ -67,9 +86,19 @@ class AnswerController extends Controller
      * @param  \App\Models\answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, answer $answer)
+    public function update($id, Request $request)
     {
-        //
+        $answer = answer::findOrFail($id);
+        $answer->question = $request->input('answer');
+        $answer->description = $request->input('description');
+        $answer->id_question = $request->input('id_question');
+        try {
+            if($answer->save()){
+                return $answer;
+            };
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -78,8 +107,13 @@ class AnswerController extends Controller
      * @param  \App\Models\answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(answer $answer)
+    public function destroy($id)
     {
-        //
+        $deletado = answer::where('id', $id)->delete();
+        if ($deletado) {
+            return 'Deletado com sucesso!';
+        } else {
+            return 'Erro ao deletar!';
+        }
     }
 }

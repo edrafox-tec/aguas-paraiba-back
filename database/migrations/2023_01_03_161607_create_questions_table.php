@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->string('answerType');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('id_formTheme')->unsigned()->nullable();
-            $table->foreign('id_formTheme')->references('id')->on('formThemes');
+            $table->foreign('id_formTheme')->references('id')->on('form_themes');
             $table->timestamps();
             $table->softDeletes();
         });
