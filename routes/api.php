@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompletedFormsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormThemeController;
 use App\Http\Controllers\QuestionController;
@@ -36,6 +37,9 @@ Route::post('show/user/',[Users::class,'show']);
 Route::post('store/user/{id}',[Users::class,'store']);
 Route::post('destroy/user/{id}',[Users::class,'destroy']);
 Route::post('update/user/{id}',[Users::class,'update']);
+
+/*CRUD COMPLETEDFORM*/
+Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
 
 /*CRUD FORMS*/
 Route::post('add/form/',[FormController::class,'create']);

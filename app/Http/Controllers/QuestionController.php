@@ -25,14 +25,14 @@ class QuestionController extends Controller
      */
     public function create(Request $request)
     {
-        $question = new question;
-        $question->question = $request('question');
-        $question->answerType = $request('answerType');
-        $question->description = $request('description');
-        $question->id_formTheme = $request('id_formTheme');
+        $questions = new question;
+        $questions->question = $request->input('question');
+        $questions->answerType = $request->input('answerType');
+        $questions->description = $request->input('description');
+        $questions->id_formTheme = $request->input('id_formTheme');
         try {
-            if($question->save()){
-                return $question;
+            if($questions->save()){
+                return $questions;
             };
         } catch (ClientException $e) {
             return $e->getMessage();
@@ -47,11 +47,11 @@ class QuestionController extends Controller
      */
     public function store($id, Request $request)
     {
-        $question = question::where('id', $id)->first();
-        if (!$question) {
+        $questions = question::where('id', $id)->first();
+        if (!$questions) {
             return 'Nenhum question encontrado!';
         } else {
-            return $question;
+            return $questions;
         }
     }
 
@@ -63,8 +63,8 @@ class QuestionController extends Controller
      */
     public function show()
     {
-        $question = question::get();
-        return $question;
+        $questions = question::get();
+        return $questions;
     }
 
     /**
@@ -87,14 +87,14 @@ class QuestionController extends Controller
      */
     public function update($id, Request $request)
     {
-        $question = question::findOrFail($id);
-        $question->question = $request->input('question');
-        $question->answerType = $request->input('answerType');
-        $question->description = $request->input('description');
-        $question->id_formTheme = $request->input('id_formTheme');
+        $questions = question::findOrFail($id);
+        $questions->question = $request->input('question');
+        $questions->answerType = $request->input('answerType');
+        $questions->description = $request->input('description');
+        $questions->id_formTheme = $request->input('id_formTheme');
         try {
-            if ($question->save()) {
-                return $question;
+            if ($questions->save()) {
+                return $questions;
             }
         } catch (ClientException $e) {
             return $e->getMessage();

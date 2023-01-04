@@ -10,7 +10,7 @@ class formTheme extends Model
 {
     use HasFactory; 
     use SoftDeletes;
-    public $table = 'formThemes';
+    public $table = 'form_themes';
     protected $fillable = [
         'theme',
         'description',

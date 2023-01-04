@@ -26,7 +26,7 @@ class AnswerController extends Controller
     public function create(Request $request)
     {
         $answer = new answer;
-        $answer->question = $request->input('answer');
+        $answer->answer = $request->input('answer');
         $answer->description = $request->input('description');
         $answer->id_question = $request->input('id_question');
         try {
