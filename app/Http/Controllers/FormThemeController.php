@@ -26,8 +26,8 @@ class FormThemeController extends Controller
     public function create(Request $request)
     {
         $formTheme = new FormTheme;
-        $formTheme->theme = $request->theme;
-        $formTheme->description = $request->description;
+        $formTheme->theme = $request->input('theme');
+        $formTheme->description = $request->input('description');
         $formTheme->id_form = $request->input('id_form');
         try {
             if ($formTheme->save()) {
