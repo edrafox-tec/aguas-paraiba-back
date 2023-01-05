@@ -16,4 +16,7 @@ class formTheme extends Model
         'description',
         'id_form',
     ];
+    public function questions(){
+        return $this->hasMany(question::class, 'id_formTheme')->with('answers');
+    }
 }
