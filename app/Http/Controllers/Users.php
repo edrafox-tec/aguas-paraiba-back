@@ -26,12 +26,26 @@ class Users extends Controller
      */
     public function create(Request $request)
     {
+        function firstname_lastname($fullname) {
+            $names = explode(' ', $fullname);
+            if(count($names) === 1) { // caso alguém tenha um só nome
+                return $names[0];
+            }
+            return $names[0]. ' ' .$names[count($names) - 1];
+        }
+        $fullname = $request->input('name');
+        $firstname_lastname = firstname_lastname($fullname);
+
         $user = new User();
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
         $user->password = bcrypt($request->input('password'));
         $user->function = $request->input('function');
         $user->level = $request->input('level');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->activated = $request->input('activated');
+        $user->nickname = $firstname_lastname;
         $user->id_sector = $request->input('id_sector');
         try {
             if($user->save()){
@@ -91,12 +105,20 @@ class Users extends Controller
      */
     public function update($id, Request $request)
     {
+        $fullname = $request->input('name');
+        $firstname_lastname = firstname_lastname($fullname);
+
+
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
         $user->password = bcrypt($request->input('password'));
         $user->function = $request->input('function');
         $user->level = $request->input('level');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->activated = $request->input('activated');
+        $user->nickname = $firstname_lastname;
         $user->id_sector = $request->input('id_sector');
         try {
             if($user->save()){

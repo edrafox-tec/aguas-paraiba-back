@@ -26,9 +26,21 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'function',
         'level',
+        'email',
+        'phone',
+        'activated',
+        'nickname',
         'id_sector'
     ];
-
+    
+    // email → string
+    
+    
+    // numero_telefone → int
+    
+    // ativado → int ( define se o cadastro foi aceito ou não 0 para desativado e 1 para ativado) default 0
+    // assinatura → string (será o caminho da imagem na amazon S3)
+    // nick → string ( monta automaticamente pegando o nome inicial e o final por exemplo rivertom vilela da silva ai fica rivertom.silva) 
     /**
      * The attributes that should be hidden for serialization.
      *

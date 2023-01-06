@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('function');
             $table->integer('level');
+            $table->string('email');
+            $table->string('phone');
+            $table->integer('activated')->default(0);
+            $table->string('nickname');
             $table->unsignedBigInteger('id_sector')->unsigned()->nullable();
             $table->foreign('id_sector')->references('id')->on('sectors');
             // $table->timestamp('email_verified_at')->nullable();
