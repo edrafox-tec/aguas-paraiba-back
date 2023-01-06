@@ -76,4 +76,3 @@ Route::post('store/sector/{id}',[SectorController::class,'store']);
 Route::post('destroy/sector/{id}',[SectorController::class,'destroy']);
 Route::post('update/sector/{id}',[SectorController::class,'update']);
 });
-Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
