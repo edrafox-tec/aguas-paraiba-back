@@ -31,7 +31,7 @@ class Users extends Controller
             if(count($names) === 1) { // caso alguém tenha um só nome
                 return $names[0];
             }
-            return $names[0]. ' ' .$names[count($names) - 1];
+            return $names[0]. '.' .$names[count($names) - 1];
         }
         $fullname = $request->input('name');
         $firstname_lastname = firstname_lastname($fullname);
