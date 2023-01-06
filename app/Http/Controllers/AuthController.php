@@ -19,7 +19,7 @@ class AuthController extends Controller
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         } else {
-            $colaborador = User::where('registration', $request->input('registration'))->first();
+            $colaborador = User::where('nickname', $request->input('nickname'))->first();
             if ($colaborador->count() > 0) {
                 $array = array(
                     "Auth"=>$this->respondWithToken($token),
