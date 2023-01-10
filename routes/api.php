@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompletedFormsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormThemeController;
+use App\Http\Controllers\PostWorkAnswerController;
+use App\Http\Controllers\PostWorkController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SectorController;
 use Illuminate\Http\Request;
@@ -40,6 +42,21 @@ Route::post('update/user/{id}',[Users::class,'update']);
 
 /*CRUD COMPLETEDFORM*/
 Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
+
+
+/*CRUD POST WORK INFOS*/
+Route::post('add/InformationForForms',[PostWorkController::class,'create']);
+Route::post('show/InformationForForms',[PostWorkController::class,'show']);
+Route::post('store/InformationForForms/{id}',[PostWorkController::class,'store']);
+Route::post('destroy/InformationForForms/{id}',[PostWorkController::class,'destroy']);
+Route::post('update/InformationForForms/{id}',[PostWorkController::class,'update']);
+/*CRUD POST WORK ANSWERS*/
+Route::post('add/AnswerForForms',[PostWorkAnswerController::class,'create']);
+Route::post('show/AnswerForForms',[PostWorkAnswerController::class,'show']);
+Route::post('store/AnswerForForms/{id}',[PostWorkAnswerController::class,'store']);
+Route::post('destroy/AnswerForForms/{id}',[PostWorkAnswerController::class,'destroy']);
+Route::post('update/AnswerForForms/{id}',[PostWorkAnswerController::class,'update']);
+
 
 /*CRUD FORMS*/
 Route::post('add/form/',[FormController::class,'create']);
