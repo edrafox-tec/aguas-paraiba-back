@@ -10,7 +10,7 @@ class postWorkAnswer extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    public $table = 'postWorkAnswers';
+    public $table = 'post_work_answers';
     protected $fillable = [
         'answer',
         'id_postWork',
