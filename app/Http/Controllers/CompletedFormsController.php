@@ -36,4 +36,9 @@ class CompletedFormsController extends Controller
         );
         return $arr;
     }*/
+
+    public function test($id){
+        $ref = postWork::findOrFail($id)->first();
+        return form::findOrFail($ref->id_form)->with('postWorkAnswer')->get();
+    }
 }
