@@ -42,6 +42,8 @@ Route::post('update/user/{id}',[Users::class,'update']);
 
 /*CRUD COMPLETEDFORM*/
 Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
+Route::post('show/CompForm/{id}',[CompletedFormsController::class,'show']);
+Route::post('showNames/CompForm',[CompletedFormsController::class,'showNames']);
 
 
 /*CRUD POST WORK INFOS*/

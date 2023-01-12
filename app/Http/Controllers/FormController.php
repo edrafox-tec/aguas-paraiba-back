@@ -61,8 +61,11 @@ class FormController extends Controller
      */
     public function show()
     {
-        $form = form::get();
-        return $form;
+        $form = form::first();
+        $arr = array(
+            'Formulário' => $form->name,
+        );
+        return $arr;
     }
 
     /**
