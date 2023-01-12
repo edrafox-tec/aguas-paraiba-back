@@ -21,7 +21,7 @@ class CompletedFormsController extends Controller
         return postWork::findOrFail($id)->with('postWorkAnswer')->get();
     }
 
-    public function showNames()
+    /*public function showNames()
     {
         $form = form::first();
         $formTheme = formTheme::first();
@@ -35,5 +35,5 @@ class CompletedFormsController extends Controller
             'Resposta' => $postWorkAnswer->answer,
         );
         return $arr;
-    }
+    }*/
 }
