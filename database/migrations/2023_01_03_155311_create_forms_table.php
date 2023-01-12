@@ -19,6 +19,8 @@ class CreateFormsTable extends Migration
             $table->softDeletes();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->unsignedBigInteger('id_sector')->unsigned()->nullable();
+            $table->foreign('id_sector')->references('id')->on('sectors');
         });
     }
 

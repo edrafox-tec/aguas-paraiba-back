@@ -18,13 +18,24 @@ class CompletedFormsController extends Controller
 
     public function show($id, Request $request) 
     {
-        return postWork::findOrFail($id)->with('postWorkAnswer')->get();
-    }
-
-    public function showNames($id){
         $ref = postWork::findOrFail($id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->get();
     }
 
+    public function perDate($id, Request $request)
+    {
+        $inicio = $request->input('initial_date');
+        $fim = $request->input('final_date');
+
+        $ref = postWork::findOrFail($id)->first()->id_form;
+        return form::findOrFail($ref)->with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->get();
+    }
+
+    public function perSector($id, Request $request)
+    {
+        $sector = $request->input('id_sector');
+        $ref = postWork::findOrFail($id)->first()->id_form;
+        return form::findOrFail($ref)->with('postWorkAnswer')->where('id_sector', $sector)->get();
+    }
     
 }

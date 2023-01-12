@@ -23,11 +23,12 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $requet)
+    public function create(Request $request)
     {
         $form = new form;
-        $form->name = $requet->input('name');
-        $form->description = $requet->input('description');
+        $form->name = $request->input('name');
+        $form->description = $request->input('description');
+        $form->id_sector = $request->input('id_sector');
         try {
             if($form->save()){
                 return $form;
@@ -88,6 +89,7 @@ class FormController extends Controller
         $form = form::findOrFail($id);
         $form->name = $request->input('name');
         $form->description = $request->input('description');
+        $form->id_sector = $request->input('id_sector');
         try {
             if($form->save()){
                 return $form;

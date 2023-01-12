@@ -15,6 +15,7 @@ class form extends Model
     protected $fillable = [
         'name',
         'description',
+        'id_sector'
     ];
     public function formThemes(){
         return $this->hasMany(formTheme::class, 'id_form')->with('questions');
