@@ -21,24 +21,10 @@ class CompletedFormsController extends Controller
         return postWork::findOrFail($id)->with('postWorkAnswer')->get();
     }
 
-    /*public function showNames()
-    {
-        $form = form::first();
-        $formTheme = formTheme::first();
-        $question = question::first();
-        $postWorkAnswer = postWorkAnswer::first();
-        
-        $arr = array(
-            'Formulário' => $form->name,
-            'Tema' => $formTheme->theme,
-            'Pergunta' => $question->question,
-            'Resposta' => $postWorkAnswer->answer,
-        );
-        return $arr;
-    }*/
-
-    public function test($id){
+    public function showNames($id){
         $ref = postWork::findOrFail($id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->get();
     }
+
+    
 }

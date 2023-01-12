@@ -43,7 +43,7 @@ Route::post('update/user/{id}',[Users::class,'update']);
 /*CRUD COMPLETEDFORM*/
 Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
 Route::post('show/CompForm/{id}',[CompletedFormsController::class,'show']);
-Route::post('showNames/CompForm',[CompletedFormsController::class,'showNames']);
+Route::post('showNames/CompForm/{id}',[CompletedFormsController::class,'showNames']);
 
 
 /*CRUD POST WORK INFOS*/
@@ -95,4 +95,3 @@ Route::post('store/sector/{id}',[SectorController::class,'store']);
 Route::post('destroy/sector/{id}',[SectorController::class,'destroy']);
 Route::post('update/sector/{id}',[SectorController::class,'update']);
 });
-Route::post('test/completForm/{id}',[CompletedFormsController::class,'test']);
