@@ -134,7 +134,6 @@ class Users extends Controller
     {
         $userPass = user::where('id', $id)->first();
         $credentials = (['nickname' => $userPass->nickname, 'password' => $request->input('current_pass')]);
-        //$credentials = ([$userPass->nickname, $request->input('current_pass')]);
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Senha divergente'], 401);
         } else {
