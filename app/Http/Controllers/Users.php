@@ -41,7 +41,7 @@ class Users extends Controller
         $user->registration = $request->input('registration');
         $user->password = bcrypt($request->input('password'));
         $user->function = $request->input('function');
-        $user->level = $request->input('level');
+        $user->level = 0;
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
         $user->activated = 0;
