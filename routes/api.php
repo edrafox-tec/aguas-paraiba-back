@@ -40,11 +40,17 @@ Route::post('store/user/{id}',[Users::class,'store']);
 Route::post('destroy/user/{id}',[Users::class,'destroy']);
 Route::post('update/user/{id}',[Users::class,'update']);
 
-/*CRUD COMPLETEDFORM*/
+/*CRUD COMPLETED FORM ADM*/
 Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
 Route::post('show/CompForm/{id}',[CompletedFormsController::class,'show']);
 Route::post('perDate/CompForm/{id}',[CompletedFormsController::class,'perDate']);
 Route::post('perSector/CompForm/{id}',[CompletedFormsController::class,'perSector']);
+
+/*CRUD COMPLETED FORM USER*/
+Route::post('storeUser/CompForm/{id}',[CompletedFormsController::class,'storeUser']);
+Route::post('showUser/CompForm/{id}',[CompletedFormsController::class,'showUser']);
+Route::post('perDateUser/CompForm/{id}',[CompletedFormsController::class,'perDateUser']);
+Route::post('perSectorUser/CompForm/{id}',[CompletedFormsController::class,'perSectorUser']);
 
 
 /*CRUD POST WORK INFOS*/
