@@ -27,12 +27,13 @@ class Users extends Controller
      */
     public function create(Request $request)
     {
-        function firstname_lastname($fullname) {
+        function firstname_lastname($fullname)
+        {
             $names = explode(' ', $fullname);
-            if(count($names) === 1) { // caso alguém tenha um só nome
+            if (count($names) === 1) { // caso alguém tenha um só nome
                 return $names[0];
             }
-            return $names[0]. '.' .$names[count($names) - 1];
+            return $names[0] . '.' . $names[count($names) - 1];
         }
         $fullname = $request->input('name');
         $firstname_lastname = firstname_lastname($fullname);
@@ -50,13 +51,12 @@ class Users extends Controller
         $user->signature = $request->input('signature');
         $user->id_sector = $request->input('id_sector');
         try {
-            if($user->save()){
+            if ($user->save()) {
                 return $user;
             };
         } catch (ClientException $e) {
             return $e->getMessage();
         }
-
     }
 
     /**
@@ -123,24 +123,29 @@ class Users extends Controller
         $user->nickname = $firstname_lastname;
         $user->id_sector = $request->input('id_sector');
         try {
-            if($user->save()){
+            if ($user->save()) {
                 return $user;
             }
         } catch (ClientException $e) {
             return $e->getMessage();
         }
     }
-    public function changePass($id,Request $request){
-        $userPass = user::where('id',$id)->first();
+    public function changePass($id, Request $request)
+    {
+        $userPass = user::where('id', $id)->first();
         $currentPass = bcrypt($request->input('current_pass'));
-        if($currentPass === $userPass->password ){
+        if ($currentPass === $userPass->password) {
             $userPass->password = bcrypt($request($request->input('new_pass')));
-            try{
-                return $userPass;
-            }catch(ClientException $e){
+            try {
+                if ($userPass->save()) {
+                    return $userPass;
+                }else{
+                    return 'Não foi possivel alterar a senha!';
+                }
+            } catch (ClientException $e) {
                 return $e->getMessage();
             }
-        }else{
+        } else {
             return 'Senha divergente!';
         }
     }
