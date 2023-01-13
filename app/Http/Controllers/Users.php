@@ -6,6 +6,7 @@ use App\Models\User;
 use GuzzleHttp\Exception\ClientException;
 
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class Users extends Controller
 {
@@ -127,6 +128,20 @@ class Users extends Controller
             }
         } catch (ClientException $e) {
             return $e->getMessage();
+        }
+    }
+    public function changePass($id,Request $request){
+        $userPass = user::where('id',$id)->first();
+        $currentPass = bcrypt($request->input('current_pass'));
+        if($currentPass === $userPass->password ){
+            $userPass->password = bcrypt($request($request->input('new_pass')));
+            try{
+                return $userPass;
+            }catch(ClientException $e){
+                return $e->getMessage();
+            }
+        }else{
+            return 'Senha divergente!'
         }
     }
 

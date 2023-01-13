@@ -39,6 +39,7 @@ Route::post('show/user/',[Users::class,'show']);
 Route::post('store/user/{id}',[Users::class,'store']);
 Route::post('destroy/user/{id}',[Users::class,'destroy']);
 Route::post('update/user/{id}',[Users::class,'update']);
+Route::post('changePass/user/{id}',[Users::class,'changePass']);
 
 /*CRUD COMPLETEDFORM*/
 Route::post('store/CompForm/{id}',[CompletedFormsController::class,'store']);
