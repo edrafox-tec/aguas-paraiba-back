@@ -141,7 +141,7 @@ class Users extends Controller
                 return $e->getMessage();
             }
         }else{
-            return 'Senha divergente!'
+            return 'Senha divergente!';
         }
     }
 
