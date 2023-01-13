@@ -44,8 +44,9 @@ class Users extends Controller
         $user->level = $request->input('level');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
-        $user->activated = $request->input('activated');
+        $user->activated = 0;
         $user->nickname = $firstname_lastname;
+        $user->signature = $request->input('signature');
         $user->id_sector = $request->input('id_sector');
         try {
             if($user->save()){

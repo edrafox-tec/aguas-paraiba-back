@@ -91,8 +91,8 @@ Route::post('update/question/{id}',[QuestionController::class,'update']);
 
 /*CRUD SECTOR*/
 Route::post('add/sector/',[SectorController::class,'create']);
-Route::post('show/sector/',[SectorController::class,'show']);
 Route::post('store/sector/{id}',[SectorController::class,'store']);
 Route::post('destroy/sector/{id}',[SectorController::class,'destroy']);
 Route::post('update/sector/{id}',[SectorController::class,'update']);
 });
+Route::post('show/sector/',[SectorController::class,'show']);
