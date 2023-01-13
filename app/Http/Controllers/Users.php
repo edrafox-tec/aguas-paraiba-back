@@ -133,20 +133,17 @@ class Users extends Controller
     public function changePass($id, Request $request)
     {
         $userPass = user::where('id', $id)->first();
-        $currentPass = bcrypt($request->input('current_pass'));
-        if ($currentPass === $userPass->password) {
-            $userPass->password = bcrypt($request($request->input('new_pass')));
-            try {
-                if ($userPass->save()) {
-                    return $userPass;
-                }else{
-                    return 'Não foi possivel alterar a senha!';
-                }
-            } catch (ClientException $e) {
-                return $e->getMessage();
-            }
+        $credentials = (['nickname' => $userPass->nickname, 'password' => $request->input('current_pass')]);
+        //$credentials = ([$userPass->nickname, $request->input('current_pass')]);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Senha divergente'], 401);
         } else {
-            return 'Senha divergente!';
+            $userPass->password = bcrypt($request->input('new_pass'));
+            if($userPass->save()){
+                return $userPass;
+            }else{
+                return 'não foi possivel alterar a senha!';
+            }
         }
     }
 
@@ -156,6 +153,14 @@ class Users extends Controller
      * @param  \App\Models\user  $user
      * @return \Illuminate\Http\Response
      */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ]);
+    }
     public function destroy($id)
     {
         $deletado = user::where('id', $id)->delete();
