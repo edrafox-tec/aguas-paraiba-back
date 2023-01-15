@@ -19,4 +19,7 @@ class postWork extends Model
     public function postWorkAnswer(){
         return $this->hasMany(postWorkAnswer::class, 'id_postWork');
     }
+    public function form(){
+        return $this->hasMany(form::class,'id','id_form');
+    }
 }

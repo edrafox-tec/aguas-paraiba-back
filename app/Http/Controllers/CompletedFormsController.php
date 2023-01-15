@@ -41,8 +41,10 @@ class CompletedFormsController extends Controller
 
     public function storeUser($id, Request $request)
     {
-        $user  = $request->input('id_user');
-        return form::findOrFail($id)->with('formThemes')->where('id_user', $user)->get();
+        $formsList = postWork::where('id_user',$id)->with('form')->get();
+        return $formsList;
+        //$user  = $request->input('id_user');
+        //return form::findOrFail($id)->with('formThemes')->where('id_user', $id)->get();
     }
 
     public function showUser($id, Request $request)

@@ -146,12 +146,12 @@ class Users extends Controller
         }
     }
 
-    /**
+    /*********
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\user  $user
      * @return \Illuminate\Http\Response
-     */
+     *********/
     protected function respondWithToken($token)
     {
         return response()->json([
