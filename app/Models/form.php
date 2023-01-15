@@ -21,6 +21,6 @@ class form extends Model
         return $this->hasMany(formTheme::class, 'id_form')->with('questions');
     }
     public function postWorkAnswer(){
-        return $this->hasMany(formTheme::class, 'id_form')->with('answer');
+        return $this->hasMany(formTheme::class, 'id_form')->with('quetionsAnswer');
     }
 }

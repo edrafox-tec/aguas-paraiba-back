@@ -19,8 +19,8 @@ class formTheme extends Model
     public function questions(){
         return $this->hasMany(question::class, 'id_formTheme')->with('answers');
     }
-    public function answer(){
-        return $this->hasMany(postWorkAnswer::class,'id_question');
+    public function quetionsAnswer(){
+        return $this->hasMany(question::class,'id_formTheme')->with('replySent');
     }
     
 }

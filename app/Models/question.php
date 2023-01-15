@@ -20,4 +20,7 @@ class question extends Model
     public function answers(){
         return $this->hasMany(answer::class,'id_question');
     }
+    public function replySent(){
+        return $this->hasMany(postWorkAnswer::class,'id_question');
+    }
 }
