@@ -43,15 +43,13 @@ class CompletedFormsController extends Controller
     {
         $formsList = postWork::where('id_user',$id)->with('form')->get();
         return $formsList;
-        //$user  = $request->input('id_user');
-        //return form::findOrFail($id)->with('formThemes')->where('id_user', $id)->get();
     }
 
     public function showUser($id, Request $request)
     {
-        $user  = $request->input('id_user');
-        $ref = postWork::findOrFail($id)->first()->id_form;
-        return form::findOrFail($ref)->with('postWorkAnswer')->where('id_user', $user)->get();
+       // $user  = $request->input('id_user');
+       $ref = postWork::findOrFail($id)->first()->id_form;
+       return form::findOrFail($ref)->with('postWorkAnswer');//->where('id_user', $user)->get();
     }
 
     public function perDateUser($id, Request $request)//Adm
