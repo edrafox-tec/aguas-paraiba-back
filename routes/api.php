@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompletedFormsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormThemeController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PostWorkAnswerController;
 use App\Http\Controllers\PostWorkController;
 use App\Http\Controllers\QuestionController;
@@ -103,3 +104,6 @@ Route::post('update/sector/{id}',[SectorController::class,'update']);
 });
 Route::post('show/sector/',[SectorController::class,'show']);
 Route::post('changePass/user/{id}',[Users::class,'changePass']);
+
+Route::get('client/export/', [ClientController::class, 'export']);
+Route::get('pdf/{id}',[PdfController::class,'index']);
