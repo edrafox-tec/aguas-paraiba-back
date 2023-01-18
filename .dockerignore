@@ -6,12 +6,13 @@ storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
+*.env*
 .rr.yml
 rr
 vendor
-vendor-2
 
 # 2. Ignore common files/directories we don't need
+fly.toml
 .vscode
 .idea
 **/*node_modules
@@ -23,3 +24,4 @@ vendor-2
 **/*.log
 **/.DS_Store
 **/Thumbs.db
+public/hot

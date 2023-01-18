@@ -1,4 +1,4 @@
-# fly.toml file generated for api-aguas on 2022-12-30T11:36:48-03:00
+# fly.toml file generated for api-aguas on 2023-01-18T12:14:55-03:00
 
 app = "api-aguas"
 kill_signal = "SIGINT"
@@ -15,10 +15,8 @@ processes = []
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-  APP_URL = "https://api-aguas.fly.dev"
 
 [experimental]
-  allowed_public_ports = []
   auto_rollback = true
 
 [[services]]
