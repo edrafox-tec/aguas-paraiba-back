@@ -8,7 +8,7 @@
 </head>
 <body>
     @foreach ($form as $forms)
-    <h2>{{$forms->all()}}</h2><br>
+    <h2>{{$forms->first()}}</h2><br>
     @endforeach
 </body>
 </html>
