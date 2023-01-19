@@ -107,8 +107,16 @@ class Users extends Controller
      */
     public function update($id, Request $request)
     {
+        function firstname_lastnames($fullname)
+        {
+            $names = explode(' ', $fullname);
+            if (count($names) === 1) { // caso alguém tenha um só nome
+                return $names[0];
+            }
+            return $names[0] . '.' . $names[count($names) - 1];
+        }
         $fullname = $request->input('name');
-        $firstname_lastname = firstname_lastname($fullname);
+        $firstname_lastname = firstname_lastnames($fullname);
 
 
         $user = user::findOrFail($id);
