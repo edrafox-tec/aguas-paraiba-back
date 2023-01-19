@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PostWorkAnswerExport;
 use App\Models\postWorkAnswer;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
+use Excel;
 
 class PostWorkAnswerController extends Controller
 {
@@ -115,5 +117,10 @@ class PostWorkAnswerController extends Controller
         } else {
             return 'Erro ao deletar!';
         }
+    }
+
+    public function export() 
+    {
+        return Excel::download(new PostWorkAnswerExport, 'PostWorkAnswer.xlsx');
     }
 }
