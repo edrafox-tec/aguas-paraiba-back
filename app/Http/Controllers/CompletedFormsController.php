@@ -55,7 +55,7 @@ class CompletedFormsController extends Controller
     public function allAnswer()
     {
        $ref = postWork::with('form')->get();
-       return $ref->toArray();//->where('id_user', $user)->get();
+       return $ref;//->where('id_user', $user)->get();
     }
 
     public function perDateUser($id, Request $request)//Adm
