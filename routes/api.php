@@ -51,6 +51,7 @@ Route::post('perSector/CompForm/{id}',[CompletedFormsController::class,'perSecto
 /*CRUD COMPLETED FORM USER*/
 Route::post('storeUser/CompForm/{id}',[CompletedFormsController::class,'storeUser']);
 Route::post('answer/CompForm/{id}',[CompletedFormsController::class,'showUser']);
+Route::post('answer/all',[CompletedFormsController::class,'allAnswer']);
 Route::post('perDateUser/CompForm/{id}',[CompletedFormsController::class,'perDateUser']);
 Route::post('perSectorUser/CompForm/{id}',[CompletedFormsController::class,'perSectorUser']);
 

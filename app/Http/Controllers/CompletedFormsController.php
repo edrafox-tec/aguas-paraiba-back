@@ -52,6 +52,11 @@ class CompletedFormsController extends Controller
       // $test = form::findOrFail($ref)->with('postWorkAnswer')->get();
        return $ref->toArray();//->where('id_user', $user)->get();
     }
+    public function allAnswer()
+    {
+       $ref = postWorkAnswer::all();
+       return $ref->toArray();//->where('id_user', $user)->get();
+    }
 
     public function perDateUser($id, Request $request)//Adm
     {
