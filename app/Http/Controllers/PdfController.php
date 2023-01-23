@@ -29,6 +29,19 @@ class PdfController extends Controller
         return $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
 
     }
+    public function indexBase64($id, Request $request)
+    {
+        $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
+        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
+        $user = user::where('id',$PostWork->id_user)->first();
+        $convertido = json_encode($formAnswer->form_array);
+        $teste = json_decode($formAnswer->form_array,true);
+        $array = $teste[0]['Themes'];
+        $title = $teste[0]['Form'];
+        $pdf = PDF::loadView('pdf', compact('array','title','user'));
+        $file = $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+        return chunk_split(base64_encode($file));
+    }
 
     /**
      * Show the form for creating a new resource.

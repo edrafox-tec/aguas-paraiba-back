@@ -109,3 +109,4 @@ Route::post('changePass/user/{id}',[Users::class,'changePass']);
 
 Route::get('postWorkAnswer/export/', [PostWorkAnswerController::class, 'export']);
 Route::get('pdf/{id}',[PdfController::class,'index']);
+Route::get('pdf64/{id}',[PdfController::class,'indexBase64']);
