@@ -7,8 +7,8 @@
     <title>PDF</title>
 </head>
 <body>
-    @foreach ($form as $forms)
-    <h2>{{$forms->first()}}</h2><br>
-    @endforeach
+    <h1>Relátorio {{$array['Form']}}</h1>
+    <h3>{{$array['Themes'][0]['theme']}}</h3>
+    <label>{{$array['Themes'][0]['answer'][0]['answer']}}</label>
 </body>
 </html>
