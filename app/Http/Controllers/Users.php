@@ -153,7 +153,21 @@ class Users extends Controller
             }
         }
     }
-
+    public function updateStatus($id){
+        $user = user::where('id',$id)->first();
+        if($user->activated == 0){
+            $user->activated = 1;
+        }else{
+            $user->activated = 0;
+        }
+        try {
+            if ($user->save()) {
+                return $user;
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
+    }
     /*********
      * Remove the specified resource from storage.
      *
