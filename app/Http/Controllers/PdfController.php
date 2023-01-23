@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\form;
+use App\Models\User;
 use App\Models\postWork;
 use App\Models\postWorkAnswer;
 use Illuminate\Http\Request;
@@ -18,25 +19,14 @@ class PdfController extends Controller
     public function index($id, Request $request)
     {
         $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
+        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
+        $user = user::where('id',$PostWork->id_user)->first();
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array,true);
-        $array = $teste[0];
-        //$data= json_decode($convertido);
-        //$ref = postWorkAnswer::where('id_postWork',$id)->first();
-        /*
-            @foreach (json_decode($array['Themes'],true) as $forms)
-    <h2>{{$forms[0]}}</h2><br>
-    @endforeach
-        */
-        //Base64 teste json_decode(
-
-        // if($form){
-            //$ref = postWork::findOrFail($id)->first()->id_form;
-            //$pdf = form::findOrFail($ref)->with('postWorkAnswer')->get();
-        // }
-        $pdf = PDF::loadView('pdf', compact('array'));
-        return $pdf->setPaper('a4')->stream('Formulário');
-      // return $array['Themes']->length;
+        $array = $teste[0]['Themes'];
+        $title = $teste[0]['Form'];
+        $pdf = PDF::loadView('pdf', compact('array','title','user'));
+        return $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
 
     }
 
