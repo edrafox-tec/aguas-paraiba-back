@@ -153,13 +153,9 @@ class Users extends Controller
             }
         }
     }
-    public function updateStatus($id){
+    public function updateStatus($id,Request $request){
         $user = user::where('id',$id)->first();
-        if($user->activated == 0){
-            $user->activated = 1;
-        }else{
-            $user->activated = 0;
-        }
+        $user->activated = $request->input('activated');
         try {
             if ($user->save()) {
                 return $user;
