@@ -40,7 +40,7 @@ class PdfController extends Controller
         $title = $teste[0]['Form'];
         $pdf = PDF::loadView('pdf', compact('array','title','user'));
         $file = $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
-        return chunk_split(base64_encode($file));
+        return [chunk_split(base64_encode($file))];
     }
 
     /**
