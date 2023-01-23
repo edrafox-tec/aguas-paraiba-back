@@ -122,7 +122,9 @@ class Users extends Controller
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
-        $user->password = bcrypt($request->input('password'));
+        if($request->input('password')){
+            $user->password = bcrypt($request->input('password'));
+        }
         $user->function = $request->input('function');
         $user->level = $request->input('level');
         $user->email = $request->input('email');
