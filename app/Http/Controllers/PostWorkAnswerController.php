@@ -28,10 +28,8 @@ class PostWorkAnswerController extends Controller
     public function create(Request $request)
     {
         $postWorkAnswer = new postWorkAnswer;
-        $postWorkAnswer->answer = $request->input('answer');
         $postWorkAnswer->id_postWork = $request->input('id_postWork');
-        $postWorkAnswer->id_question = $request->input('id_question');
-        $postWorkAnswer->id_answer = $request->input('id_answer');
+        $postWorkAnswer->form_array = $request->input('form_array');
         try {
             if ($postWorkAnswer->save()) {
                 return $postWorkAnswer;

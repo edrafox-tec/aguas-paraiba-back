@@ -12,9 +12,8 @@ class postWorkAnswer extends Model
     use SoftDeletes;
     public $table = 'post_work_answers';
     protected $fillable = [
-        'answer',
+        'id',
         'id_postWork',
-        'id_question',
-        'id_answer',
+        'form_array'
     ];
 }

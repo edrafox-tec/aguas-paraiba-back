@@ -48,9 +48,9 @@ class CompletedFormsController extends Controller
     public function showUser($id, Request $request)
     {
        // $user  = $request->input('id_user');
-       $ref = postWork::where('id',$id)->first()->id_form;
-       $test = form::findOrFail($ref)->with('postWorkAnswer')->get();
-       return $test->toArray();//->where('id_user', $user)->get();
+       $ref = postWorkAnswer::where('id_postWork',$id)->first();
+      // $test = form::findOrFail($ref)->with('postWorkAnswer')->get();
+       return $ref->toArray();//->where('id_user', $user)->get();
     }
 
     public function perDateUser($id, Request $request)//Adm
