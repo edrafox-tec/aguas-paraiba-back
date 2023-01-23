@@ -13,12 +13,12 @@ class CompletedFormsController extends Controller
 {
     public function store($id, Request $request)//Adm
     {
-        return form::findOrFail($id)->with('formThemes')->get();
+        return form::where('id',$id)->with('formThemes')->get();
     }
 
     public function show($id, Request $request) //Adm
     {
-        $ref = postWork::findOrFail($id)->first()->id_form;
+        $ref = postWork::where('id',$id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->get();
     }
 
@@ -27,14 +27,14 @@ class CompletedFormsController extends Controller
         $inicio = $request->input('initial_date');
         $fim = $request->input('final_date');
 
-        $ref = postWork::findOrFail($id)->first()->id_form;
+        $ref = postWork::where('id',$id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->get();
     }
 
     public function perSector($id, Request $request)//Adm
     {
         $sector = $request->input('id_sector');
-        $ref = postWork::findOrFail($id)->first()->id_form;
+        $ref = postWork::where('id',$id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->where('id_sector', $sector)->get();
     }
     //Rota para usuario
@@ -64,7 +64,7 @@ class CompletedFormsController extends Controller
         $fim = $request->input('final_date');
         $user  = $request->input('id_user');
 
-        $ref = postWork::findOrFail($id)->first()->id_form;
+        $ref = postWork::where('id',$id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->where('id_user', $user)->get();
     }
 
@@ -72,7 +72,7 @@ class CompletedFormsController extends Controller
     {
         $user  = $request->input('id_user');
         $sector = $request->input('id_sector');
-        $ref = postWork::findOrFail($id)->first()->id_form;
+        $ref = postWork::where('id',$id)->first()->id_form;
         return form::findOrFail($ref)->with('postWorkAnswer')->where('id_sector', $sector)->where('id_user', $user)->get();
     }
 }
