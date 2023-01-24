@@ -117,8 +117,9 @@ class PostWorkAnswerController extends Controller
         }
     }
 
-    public function export() 
+    public function export($id) 
     {
-        return Excel::download(new PostWorkAnswerExport, 'PostWorkAnswer.xlsx');
+        $test = new PostWorkAnswerExport($id);
+        return Excel::download($test,'test.xlsx');
     }
 }

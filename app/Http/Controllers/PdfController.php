@@ -24,9 +24,13 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array,true);
         $array = $teste[0]['Themes'];
-        $title = $teste[0]['Form'];
-        $pdf = PDF::loadView('pdf', compact('array','title','user'));
-        return $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+        if($array){
+            $title = $teste[0]['Form'];
+            $pdf = PDF::loadView('pdf', compact('array','title','user'));
+            return $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+        }else{
+            return 'Formulário corrompido';
+        }
 
     }
     public function indexBase64($id, Request $request)
@@ -37,16 +41,21 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array,true);
         $array = $teste[0]['Themes'];
-        $title = $teste[0]['Form'];
-        $pdf = PDF::loadView('pdf', compact('array','title','user'));
-        $file = $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
-        $pdfView = chunk_split(base64_encode($file));
-        $arr = [];
-        array_push($arr,array(
-            'base64' => 'data:application/pdf;base64,'.$pdfView
-        )
-    );
-    return $arr;
+        if($array){
+
+            $title = $teste[0]['Form'];
+            $pdf = PDF::loadView('pdf', compact('array','title','user'));
+            $file = $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+            $pdfView = chunk_split(base64_encode($file));
+            $arr = [];
+            array_push($arr,array(
+                'base64' => 'data:application/pdf;base64,'.$pdfView
+                )
+            );
+            return $arr;
+        }else{
+            return ["Formulário corrompido"];
+        }
     }
 
     /**
