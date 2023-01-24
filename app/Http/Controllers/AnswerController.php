@@ -89,7 +89,7 @@ class AnswerController extends Controller
     public function update($id, Request $request)
     {
         $answer = answer::findOrFail($id);
-        $answer->question = $request->input('answer');
+        $answer->answer = $request->input('answer');
         $answer->description = $request->input('description');
         $answer->id_question = $request->input('id_question');
         try {
