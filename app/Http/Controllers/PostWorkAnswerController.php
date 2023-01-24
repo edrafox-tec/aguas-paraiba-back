@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\PostWorkAnswerExport;
 use App\Models\postWorkAnswer;
+use App\Models\form;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
+use App\Models\postWork;
 use Excel;
 
 class PostWorkAnswerController extends Controller
@@ -119,7 +121,10 @@ class PostWorkAnswerController extends Controller
 
     public function export($id) 
     {
-        $test = new PostWorkAnswerExport($id);
-        return Excel::download($test,'test.xlsx');
+        $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
+        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
+        $Form = form::where('id',$PostWork->id_form)->first();
+        $ExcelPlan = new PostWorkAnswerExport($id);
+        return Excel::download($ExcelPlan,$Form->name.'.xlsx');
     }
 }
