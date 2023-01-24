@@ -30,7 +30,7 @@
             <label>Resposta: {{$answer['answer']}}</label>
         @endif
         @if($answer['type_question'] == 'photo' || $answer['type_question'] == 'draw' && $answer['type_question'] != 'date')
-            <img style='height:350px; width:400px' src="{{$answer['answer']}}" />
+            <img src="{{$answer['answer']}}" />
         @endif
         @if($answer['type_question'] == 'date')
             <label >Resposta: {{$answer['answer']}}</label>
