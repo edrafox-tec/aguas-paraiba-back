@@ -27,13 +27,13 @@
         <h4>{{$item['theme']}}</h4>
         @foreach ($item['answer'] as $answer)
         @if($answer['type_question'] != 'photo' && $answer['type_question'] != 'draw'&& $answer['type_question'] != 'date')
-            <label>Resposta: {{$answer['answer']}}</label>
+            <label>Resposta: {{$answer['answer']}}</label><br>
         @endif
         @if($answer['type_question'] == 'photo' || $answer['type_question'] == 'draw' && $answer['type_question'] != 'date')
             <img style='height:294px; width:594px' src="{{$answer['answer']}}" />
         @endif
         @if($answer['type_question'] == 'date')
-            <label >Resposta: {{$answer['answer']}}</label>
+            <label >Resposta: {{date('d/m/Y h:m',strtotime($answer['answer']))}}</label><br>
         @endif
         @endforeach
     </div><br>

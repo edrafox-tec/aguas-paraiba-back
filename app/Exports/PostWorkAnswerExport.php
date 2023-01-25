@@ -3,19 +3,13 @@
 namespace App\Exports;
 
 use App\Models\postWorkAnswer;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
-use App\Models\User;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-
 class PostWorkAnswerExport implements FromView, ShouldAutoSize
 {
     use Exportable;
-    private $fileName = 'testName.xlsx';
     protected $excelTest;
     /**
     * @return \Illuminate\Support\Collection
@@ -24,6 +18,7 @@ class PostWorkAnswerExport implements FromView, ShouldAutoSize
     {
         $this->excelTest = $id;
     }
+
     public function view(): View
     {
         $formAnswer = postWorkAnswer::where('id_postWork',$this->excelTest)->first();

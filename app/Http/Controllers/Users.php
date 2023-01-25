@@ -155,6 +155,16 @@ class Users extends Controller
             }
         }
     }
+    public function changeSignature($id, Request $request)
+    {
+        $user = user::where('id', $id)->first();
+        $user->signature = $request->input('signature');
+        if($user->save()){
+            return $user;
+        }else{
+            return ['Erro'];
+        }
+    }
     public function updateStatus($id,Request $request){
         $user = user::where('id',$id)->first();
         $user->activated = $request->input('activated');

@@ -106,6 +106,7 @@ Route::post('update/sector/{id}',[SectorController::class,'update']);
 });
 Route::post('show/sector/',[SectorController::class,'show']);
 Route::post('changePass/user/{id}',[Users::class,'changePass']);
+Route::post('changeSignature/user/{id}',[Users::class,'changeSignature']);
 
 Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'export']);
 Route::get('pdf/{id}',[PdfController::class,'index']);
