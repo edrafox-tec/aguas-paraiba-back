@@ -38,5 +38,7 @@
         @endforeach
     </div><br>
     @endforeach
+    <h6>Foto da assinatura</h6>
+    <img src="{{$user->signature}}">
 </body>
 </html>
