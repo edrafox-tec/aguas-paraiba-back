@@ -193,10 +193,12 @@ class Users extends Controller
     public function destroy($id)
     {
         $deletado = user::where('id', $id)->delete();
-        if ($deletado) {
-            return 'Deletado com sucesso!';
-        } else {
-            return 'Erro ao deletar!';
+        try {
+            if ($deletado) {
+                return 'Deletado com sucesso';
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
         }
     }
 }
