@@ -14,6 +14,7 @@ class postWorkAnswer extends Model
     protected $fillable = [
         'id',
         'id_postWork',
-        'form_array'
+        'form_array',
+        'conformity'
     ];
 }

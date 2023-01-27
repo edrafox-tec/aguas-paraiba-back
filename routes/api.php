@@ -54,6 +54,7 @@ Route::post('answer/CompForm/{id}',[CompletedFormsController::class,'showUser'])
 Route::post('answer/all',[CompletedFormsController::class,'allAnswer']);
 Route::post('perDateUser/CompForm/{id}',[CompletedFormsController::class,'perDateUser']);
 Route::post('perSectorUser/CompForm/{id}',[CompletedFormsController::class,'perSectorUser']);
+Route::post('filter/CompForm',[CompletedFormsController::class,'filter']);
 
 
 /*CRUD POST WORK INFOS*/
