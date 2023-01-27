@@ -8,6 +8,7 @@ use App\Models\postWork;
 use App\Models\postWorkAnswer;
 use App\Models\question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompletedFormsController extends Controller
 {
@@ -95,5 +96,16 @@ class CompletedFormsController extends Controller
         $results = $query->get();
 
         return $results;
+    }
+
+    public function postWorkBySector(Request $request)
+    {
+        $id_sector = $request->input('id_sector');
+        $postWork = DB::table('post_works')
+            ->where('id_sector', $id_sector)
+            ->join('post_work_answers', 'post_work_answers.id_postWork', '=', 'id_postWork')
+            ->where('post_work_answers.conformity', 0)
+            ->get();
+        return $postWork;
     }
 }
