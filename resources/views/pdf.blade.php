@@ -19,9 +19,7 @@
             height: 70px;
         }
 
-        * {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-        }
+
         th{
             background: rgb(194, 194, 194);
             color:black;
@@ -45,6 +43,9 @@
   height: 198px;
   border: solid 1px black;
 }
+* h1, h2, h3 , h4 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        }
     </style>
 </head>
 
@@ -55,8 +56,8 @@
                     src='https://www.revistameucondominio.com.br/wp-content/uploads/2022/04/logo-aguas-do-paraiba.png'>
             </th>
             <th style='width:40%;background:white'>
-                <div style="background-color: #033D60;color:white;width:400px;padding:1%">Relátorio {{$title}}
-                    #12</div>
+                <div class="text-center" style="background-color: #033D60;color:white;width:400px;padding:1%">
+                    <h3>Relátorio {{$title}} #12</h3></div>
             </th>
         </table>
         <table class="headForm">
@@ -79,62 +80,23 @@
 
         <table>
             <tbody>
-                {{$array}}
-                <!--@foreach ($array as $item)
-                
+                @foreach ($array as $item)
                 <tr style="text-align: left">
                     @if ($item['theme'] != 'Setor' && $item['theme'] != 'Data')
                     <th style="text-align: left"><label>{{$item['theme']}}:</label></th>
                     <td>
-                        {{$item['answer'][0]}}
                         @foreach ( $item['answer'] as $answer)
                         <label>{{$answer['answer']}}</label>
                         @endforeach
                     </td>
                     @endif
                 </tr>
-                @endforeach-->
+                @endforeach
             </tbody>
         </table>
-       <!-- <div class="row">
-            @foreach ( $array as $item)
-            <div class="col-md-2" style='border:2px solid blue'>
-                    <label style='color:red'>{{$item['theme']}}</label>
-                    @foreach ( $item['answer'] as $answer)
-                        <label>{{$answer['answer']}}</label>
-                    @endforeach
-                </div>
-                @endforeach
-        </div>-->
         <h6>Foto da assinatura</h6>
         <img style='height:100px; width:294px' src="{{$user->signature}}">
     </div>
-   <!-- <div style="align-content: center;align-items:center;justify-content:center">
-        <img style='margin:auto;width:120px;height:120px'
-            src='https://1.bp.blogspot.com/-jmJJUvAjHfU/XcNVtjsOkvI/AAAAAAAAbbU/KKvitRbzLcofKhLCwFRYuYk7a6DEGrNWwCLcBGAsYHQ/s1600/Grupo-aguas-do-Brasil-1024x678.jpg'>
-    </div>
-    <h1>Relátorio {{$title}}</h1>
-    <p>Responsavel:{{$user->name}}</p>
-    <p>Maricula:{{$user->registration}}</p>
-    <h3>Informações</h3>
-    @foreach ($array as $item)
-    <div>
-        <h4>{{$item['theme']}}</h4>
-        @foreach ($item['answer'] as $answer)
-        @if($answer['type_question'] != 'photo' && $answer['type_question'] != 'draw'&& $answer['type_question'] !=
-        'date')
-        <label>Resposta: {{$answer['answer']}}</label><br>
-        @endif
-        @if($answer['type_question'] == 'photo' || $answer['type_question'] == 'draw' && $answer['type_question'] !=
-        'date')
-        <img style='height:294px; width:594px' src="{{$answer['answer']}}" />
-        @endif
-        @if($answer['type_question'] == 'date')
-        <label>Resposta: {{date('d/m/Y h:m',strtotime($answer['answer']))}}</label><br>
-        @endif
-        @endforeach
-    </div><br>
-    @endforeach-->
 </body>
 
 </html>
