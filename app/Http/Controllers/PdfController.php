@@ -27,7 +27,7 @@ class PdfController extends Controller
         if($array){
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array','title','user'));
-            return $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+            return $pdf->setPaper('a4')->stream($title.'-'.bcrypt($user->id).'.pdf');
         }else{
             return 'Formulário corrompido';
         }
