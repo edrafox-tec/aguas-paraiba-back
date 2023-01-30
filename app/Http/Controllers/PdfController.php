@@ -24,10 +24,11 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array,true);
         $array = $teste[0]['Themes'];
+        //return $array;
         if($array){
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array','title','user'));
-            return $pdf->setPaper('a4')->stream($title.'-'.bcrypt($user->id).'.pdf');
+            return $pdf->setPaper('a4')->download($title.'-'.$user->name.'.pdf');
         }else{
             return 'Formulário corrompido';
         }
@@ -45,7 +46,7 @@ class PdfController extends Controller
 
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array','title','user'));
-            $file = $pdf->setPaper('a4')->download($title.'-'.bcrypt($user->id).'.pdf');
+            $file = $pdf->setPaper('a4')->download($title.'-'.$user->name.'.pdf');
             $pdfView = chunk_split(base64_encode($file));
             $arr = [];
             array_push($arr,array(

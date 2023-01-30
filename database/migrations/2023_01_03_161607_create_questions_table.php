@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->string('question');
             $table->string('answerType');
-            $table->int('required')->default(1);
+            $table->integer('required')->default(1);
             $table->string('description')->nullable();
             $table->unsignedBigInteger('id_formTheme')->unsigned()->nullable();
             $table->foreign('id_formTheme')->references('id')->on('form_themes');

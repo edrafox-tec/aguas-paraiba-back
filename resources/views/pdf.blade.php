@@ -48,87 +48,95 @@
                 </div>
             </th>
         </table>
+        <!--Fist Table Head-->
         <table class="headForm">
             <tr>
                 <th><label>Setor:</label></th>
                 <td><label>{{$user->function}}</label></td>
                 <th><label>Responsavel:</label></th>
                 <td><label>{{$user->name}}</label></td>
-                @foreach ($array as $item)
-                @if ($item['theme'] == 'Data')
-                @foreach ( $item['answer'] as $answer)
-                <th><label>Data:</label></th>
-                <td><label>{{date('d/m/Y h:m',strtotime($answer['answer']))}}</label></td>
-                @endforeach
-                @endif
-                @endforeach
-            </tr>
-            <tr>
-                @foreach ($array as $item)
-                @if ($item['theme'] == 'Equipe' || $item['theme'] == 'Local da inspeção')
-                <th><label>{{$item['theme']}}:</label></th>
-                @foreach ( $item['answer'] as $answer)
-                <td><label>{{$answer['answer']}}</label></td>
-                @endforeach
-                @endif
+                @foreach ( $array as $item )
+                    @foreach ( $item['AllAnswer'] as $themes )
+                        @if ($themes['theme'] == 'Data')
+                            @foreach ($themes['answer'] as $answer )
+                                <th><label>Data:</label></th>
+                                <td><label>{{date('d/m/Y h:m',strtotime($answer['answer']))}}</label></td>
+                            @endforeach
+                        @endif
+                    @endforeach
                 @endforeach
             </tr>
             <tr>
-                @foreach ($array as $item)
-                @if ($item['theme'] == 'Sobre os projetos e especificações' || $item['theme'] == 'Documentos de
-                Referência/Anexos')
-                <th><label>{{$item['theme']}}:</label></th>
-                @foreach ( $item['answer'] as $answer)
-                <td><label>{{$answer['answer']}}</label></td>
+            @foreach ( $array as $item )
+                @foreach ( $item['AllAnswer'] as $themes )
+                    @if ($themes['theme'] == 'Equipe' || $themes['theme'] == 'Local da inspeção')
+                        @foreach ($themes['answer'] as $answer )
+                            <th><label>{{$themes['theme']}}:</label></th>
+                            <td><label>{{$answer['answer']}}</label></td>
+                        @endforeach
+                    @endif
                 @endforeach
-                @endif
-                @endforeach
+            @endforeach
             </tr>
             <tr>
-                @foreach ($array as $item)
-                @if ($item['theme'] == 'Condições de clima' || $item['theme'] == 'Condições de Segurança das
-                Adjacências')
-                <th><label>{{$item['theme']}}:</label></th>
-                @foreach ( $item['answer'] as $answer)
-                <td><label>{{$answer['answer']}}</label></td>
+            @foreach ( $array as $item )
+                @foreach ( $item['AllAnswer'] as $themes )
+                    @if ($themes['theme'] == 'Sobre os projetos e especificações' || $themes['theme'] == 'Documentos de Referência/Anexos')
+                        @foreach ($themes['answer'] as $answer )
+                            <th><label>{{$themes['theme']}}:</label></th>
+                            <td><label>{{$answer['answer']}}</label></td>
+                        @endforeach
+                    @endif
                 @endforeach
-                @endif
+            @endforeach
+            </tr>
+            <tr>
+            @foreach ( $array as $item )
+                @foreach ( $item['AllAnswer'] as $themes )
+                    @if ($themes['theme'] == 'Condições de clima' || $themes['theme'] == 'Condições de Segurança das Adjacências')
+                        @foreach ($themes['answer'] as $answer )
+                            <th><label>{{$themes['theme']}}:</label></th>
+                            <td><label>{{$answer['answer']}}</label></td>
+                        @endforeach
+                    @endif
                 @endforeach
+            @endforeach
             </tr>
         </table>
-
-        <table>
+        <!--Fist Table Head-->
+        <!-- Table Answer -->
+        <table style='width:100%'>
+            @foreach ( $array as $item )
+            <thead>
+                <tr>
+                    <th colspan="2"><label>{{$item['MasterTheme']}}</label></th>
+                </tr>
+            </thead>
             <tbody>
-                @foreach ($array as $item)
-                <tr style="text-align: left">
-                    @if ($item['theme'] !== 'Equipe' && $item['theme'] !== 'Local da inspeção' && $item['theme'] !==
-                    'Sobre os projetos e especificações' && $item['theme'] !== 'Documentos de Referência/Anexos' &&
-                    $item['theme'] != 'Setor' && $item['theme'] != 'Data' && $item['theme'] !== 'Condições de clima' &&
-                    $item['theme'] !== 'Condições de Segurança das Adjacências' )
-                    <th style="text-align: left"><label>{{$item['theme']}}:</label></th>
-                    <td>
-                        @foreach ( $item['answer'] as $answer)
-                        @if ($answer['type_question'] == 'photo' || $answer['type_question'] == 'draw' &&
-                        $answer['type_question'] != 'date')
-                        <img style="width: 40%;height:20%" src='{{$answer['answer']}}'/>
-                        <img style="width: 40%;height:20%" src='{{$answer['answer']}}'/>
-                        @endif
-                        @if ($answer['type_question'] == 'date')
-                        <label>{{date('d/m/Y h:m',strtotime($answer['answer']))}}</label>
-                        @endif
-                        @if ($answer['type_question'] != 'photo' && $answer['type_question'] != 'draw' &&
-                        $answer['type_question'] != 'date')
+                @foreach ($item['AllAnswer'] as $questions)
+                @if ($questions['theme'] !== 'Equipe' && $questions['theme'] !== 'Local da inspeção' && $questions['theme'] !==
+                'Sobre os projetos e especificações' && $questions['theme'] !== 'Documentos de Referência/Anexos' &&
+                $questions['theme'] != 'Setor' && $questions['theme'] != 'Data' && $questions['theme'] !== 'Condições de clima' &&
+                $questions['theme'] !== 'Condições de Segurança das Adjacências' )        
+                <tr>
+                    <td style="width:30%"><label>{{$questions['theme']}}</label></td>
+                    <td style="width:70%">
+                        @foreach ($questions['answer'] as $answer )
                         <label>{{$answer['answer']}}</label>
-                        @endif
                         @endforeach
                     </td>
-                    @endif
                 </tr>
+                @endif
                 @endforeach
             </tbody>
+            @endforeach
         </table>
-        <h6>Foto da assinatura</h6>
-        <img style='height:100px; width:194px' src="{{$user->signature}}">
+        <table style="width:100%">
+            <tr>
+                <td><label>Assinatura:</label></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+            </tr>
+        </table>
     </div>
 </body>
 
