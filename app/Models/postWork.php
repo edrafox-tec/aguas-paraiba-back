@@ -16,10 +16,12 @@ class postWork extends Model
         'id_form',
         'id_user',
     ];
-    public function postWorkAnswer(){
+    public function postWorkAnswer()
+    {
         return $this->hasMany(postWorkAnswer::class, 'id_postWork');
     }
-    public function form(){
-        return $this->hasMany(form::class,'id','id_form');
+    public function form()
+    {
+        return $this->hasMany(form::class, 'id', 'id_form');
     }
 }

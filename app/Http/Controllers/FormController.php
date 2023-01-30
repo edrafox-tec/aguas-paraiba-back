@@ -30,7 +30,7 @@ class FormController extends Controller
         $form->description = $request->input('description');
         $form->id_sector = $request->input('id_sector');
         try {
-            if($form->save()){
+            if ($form->save()) {
                 return $form;
             };
         } catch (ClientException $e) {
@@ -91,7 +91,7 @@ class FormController extends Controller
         $form->description = $request->input('description');
         $form->id_sector = $request->input('id_sector');
         try {
-            if($form->save()){
+            if ($form->save()) {
                 return $form;
             }
         } catch (ClientException $e) {

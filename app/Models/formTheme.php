@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\postWorkAnswer;
+
 class formTheme extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     use SoftDeletes;
     public $table = 'form_themes';
     protected $fillable = [
@@ -16,11 +17,12 @@ class formTheme extends Model
         'description',
         'id_form',
     ];
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany(question::class, 'id_formTheme')->with('answers');
     }
-    public function quetionsAnswer(){
-        return $this->hasMany(question::class,'id_formTheme')->with('replySent');
+    public function quetionsAnswer()
+    {
+        return $this->hasMany(question::class, 'id_formTheme')->with('replySent');
     }
-    
 }

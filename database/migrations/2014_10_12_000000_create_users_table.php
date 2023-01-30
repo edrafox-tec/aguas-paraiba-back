@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('registration')->unique();//matricula 
+            $table->integer('registration')->unique(); //matricula 
             $table->string('password');
             $table->string('function');
             $table->integer('level');
@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->string('signature');
             $table->unsignedBigInteger('id_sector')->unsigned()->nullable();
             $table->foreign('id_sector')->references('id')->on('sectors');
-            // $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

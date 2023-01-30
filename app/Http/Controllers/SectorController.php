@@ -113,7 +113,7 @@ class SectorController extends Controller
      * @param  \App\Models\sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $deletado = sector::where('id', $id)->delete();
         if ($deletado) {

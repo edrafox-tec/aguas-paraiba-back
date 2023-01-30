@@ -122,7 +122,7 @@ class Users extends Controller
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
-        if($request->input('password')){
+        if ($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
         $user->function = $request->input('function');
@@ -148,9 +148,9 @@ class Users extends Controller
             return response()->json(['error' => 'Senha divergente'], 401);
         } else {
             $userPass->password = bcrypt($request->input('new_pass'));
-            if($userPass->save()){
+            if ($userPass->save()) {
                 return $userPass;
-            }else{
+            } else {
                 return 'não foi possivel alterar a senha!';
             }
         }
@@ -159,14 +159,15 @@ class Users extends Controller
     {
         $user = user::where('id', $id)->first();
         $user->signature = $request->input('signature');
-        if($user->save()){
+        if ($user->save()) {
             return $user;
-        }else{
+        } else {
             return ['Erro'];
         }
     }
-    public function updateStatus($id,Request $request){
-        $user = user::where('id',$id)->first();
+    public function updateStatus($id, Request $request)
+    {
+        $user = user::where('id', $id)->first();
         $user->activated = $request->input('activated');
         try {
             if ($user->save()) {

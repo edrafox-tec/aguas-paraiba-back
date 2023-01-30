@@ -59,7 +59,7 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\answer  $answer
+     * @param  \App\Models\answer  $answerF
      * @return \Illuminate\Http\Response
      */
     public function show()

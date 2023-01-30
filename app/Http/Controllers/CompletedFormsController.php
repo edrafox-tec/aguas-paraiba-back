@@ -91,8 +91,6 @@ class CompletedFormsController extends Controller
         if ($request->has('conformity')) {
             $query->where('conformity', $request->input('conformity'));
         }
-        //$query = $query->toSql();
-        //dd($query);
         $results = $query->get();
 
         return $results;

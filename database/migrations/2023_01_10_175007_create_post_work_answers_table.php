@@ -21,12 +21,6 @@ class CreatePostWorkAnswersTable extends Migration
             $table->integer('conformity')->nullable();
             $table->timestamps();
             $table->softDeletes();
-           /* $table->string('answer')->nullable();
-            $table->unsignedBigInteger('id_question')->unsigned()->nullable();
-            $table->foreign('id_question')->references('id')->on('questions');
-            $table->unsignedBigInteger('id_answer')->unsigned()->nullable();
-            $table->foreign('id_answer')->references('id')->on('answers');
-            */
         });
     }
 

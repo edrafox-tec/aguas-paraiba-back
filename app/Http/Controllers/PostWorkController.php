@@ -30,7 +30,7 @@ class PostWorkController extends Controller
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
         try {
-            if($postWork->save()){
+            if ($postWork->save()) {
                 return $postWork;
             };
         } catch (ClientException $e) {
@@ -91,7 +91,7 @@ class PostWorkController extends Controller
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
         try {
-            if($postWork->save()){
+            if ($postWork->save()) {
                 return $postWork;
             };
         } catch (ClientException $e) {

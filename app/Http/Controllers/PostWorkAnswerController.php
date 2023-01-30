@@ -119,12 +119,12 @@ class PostWorkAnswerController extends Controller
         }
     }
 
-    public function export($id) 
+    public function export($id)
     {
-        $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
-        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
-        $Form = form::where('id',$PostWork->id_form)->first();
+        $formAnswer = postWorkAnswer::where('id_postWork', $id)->first();
+        $PostWork = postWork::where('id', $formAnswer->id_postWork)->first();
+        $Form = form::where('id', $PostWork->id_form)->first();
         $ExcelPlan = new PostWorkAnswerExport($id);
-        return Excel::download($ExcelPlan,$Form->name.'.xlsx');
+        return Excel::download($ExcelPlan, $Form->name . '.xlsx');
     }
 }

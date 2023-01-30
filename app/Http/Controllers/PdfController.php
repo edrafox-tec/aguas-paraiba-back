@@ -18,43 +18,44 @@ class PdfController extends Controller
      */
     public function index($id, Request $request)
     {
-        $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
-        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
-        $user = user::where('id',$PostWork->id_user)->first();
+        $formAnswer = postWorkAnswer::where('id_postWork', $id)->first();
+        $PostWork = postWork::where('id', $formAnswer->id_postWork)->first();
+        $user = user::where('id', $PostWork->id_user)->first();
         $convertido = json_encode($formAnswer->form_array);
-        $teste = json_decode($formAnswer->form_array,true);
+        $teste = json_decode($formAnswer->form_array, true);
         $array = $teste[0]['Themes'];
         //return $array;
-        if($array){
+        if ($array) {
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array','title','user'));
-            return $pdf->setPaper('a4')->download($title.'-'.$user->name.'.pdf');
-        }else{
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
+            return $pdf->setPaper('a4')->download($title . '-' . $user->name . '.pdf');
+        } else {
             return 'Formulário corrompido';
         }
-
     }
     public function indexBase64($id, Request $request)
     {
-        $formAnswer = postWorkAnswer::where('id_postWork',$id)->first();
-        $PostWork = postWork::where('id',$formAnswer->id_postWork)->first();
-        $user = user::where('id',$PostWork->id_user)->first();
+        $formAnswer = postWorkAnswer::where('id_postWork', $id)->first();
+        $PostWork = postWork::where('id', $formAnswer->id_postWork)->first();
+        $user = user::where('id', $PostWork->id_user)->first();
         $convertido = json_encode($formAnswer->form_array);
-        $teste = json_decode($formAnswer->form_array,true);
+        $teste = json_decode($formAnswer->form_array, true);
         $array = $teste[0]['Themes'];
-        if($array){
+        if ($array) {
 
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array','title','user'));
-            $file = $pdf->setPaper('a4')->download($title.'-'.$user->name.'.pdf');
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
+            $file = $pdf->setPaper('a4')->download($title . '-' . $user->name . '.pdf');
             $pdfView = chunk_split(base64_encode($file));
             $arr = [];
-            array_push($arr,array(
-                'base64' => 'data:application/pdf;base64,'.$pdfView
+            array_push(
+                $arr,
+                array(
+                    'base64' => 'data:application/pdf;base64,' . $pdfView
                 )
             );
             return $arr;
-        }else{
+        } else {
             return ["Formulário corrompido"];
         }
     }

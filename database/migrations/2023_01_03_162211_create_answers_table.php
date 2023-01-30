@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
             $table->string('description')->nullable();
             $table->unsignedBigInteger('id_question')->unsigned()->nullable();
             $table->foreign('id_question')->references('id')->on('questions');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

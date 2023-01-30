@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\formTheme;
 use App\Models\postWorkAnswer;
+
 class form extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     use SoftDeletes;
     public $table = 'forms';
     protected $fillable = [
@@ -17,10 +18,12 @@ class form extends Model
         'description',
         'id_sector'
     ];
-    public function formThemes(){
+    public function formThemes()
+    {
         return $this->hasMany(formTheme::class, 'id_form')->with('questions');
     }
-    public function postWorkAnswer(){
+    public function postWorkAnswer()
+    {
         return $this->hasMany(formTheme::class, 'id_form')->with('quetionsAnswer');
     }
 }
