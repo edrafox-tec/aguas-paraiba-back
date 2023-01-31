@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\postWork;
+use App\Models\postWorkAnswer;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,7 @@ class PostWorkController extends Controller
         $postWork->id_sector = $request->input('id_sector');
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
+        $postWork->conformity = $request->input('conformity');
         try {
             if ($postWork->save()) {
                 return $postWork;
@@ -90,6 +92,7 @@ class PostWorkController extends Controller
         $postWork->id_sector = $request->input('id_sector');
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
+        $postWork->conformity = $request->input('conformity');
         try {
             if ($postWork->save()) {
                 return $postWork;
@@ -107,11 +110,17 @@ class PostWorkController extends Controller
      */
     public function destroy($id)
     {
-        $deletado = postWork::where('id', $id)->delete();
-        if ($deletado) {
-            return 'Deletado com sucesso!';
-        } else {
-            return 'Erro ao deletar!';
+        $postWork = PostWork::find($id);
+        $postWorkAnswers = postWorkAnswer::where('id_postWork', $id)->get();
+
+        if ($postWorkAnswers->count() > 0) {
+            foreach ($postWorkAnswers as $postWorkAnswer) {
+                $postWorkAnswer->delete();
+            }
         }
+
+        $postWork->delete();
+
+        return redirect()->back();
     }
 }

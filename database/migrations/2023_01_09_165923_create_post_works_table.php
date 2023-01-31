@@ -20,6 +20,7 @@ class CreatePostWorksTable extends Migration
             $table->foreign('id_form')->references('id')->on('forms');
             $table->unsignedBigInteger('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
+            $table->integer('conformity')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

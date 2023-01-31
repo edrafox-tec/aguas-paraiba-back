@@ -18,7 +18,6 @@ class CreatePostWorkAnswersTable extends Migration
             $table->foreign('id_postWork')->references('id')->on('post_works');
             $table->unsignedBigInteger('id_postWork')->unsigned()->nullable();
             $table->json('form_array');
-            $table->integer('conformity')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

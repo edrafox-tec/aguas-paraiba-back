@@ -32,7 +32,6 @@ class PostWorkAnswerController extends Controller
         $postWorkAnswer = new postWorkAnswer;
         $postWorkAnswer->id_postWork = $request->input('id_postWork');
         $postWorkAnswer->form_array = $request->input('form_array');
-        $postWorkAnswer->conformity = $request->input('conformity');
         try {
             if ($postWorkAnswer->save()) {
                 return $postWorkAnswer;
@@ -93,7 +92,6 @@ class PostWorkAnswerController extends Controller
         $postWorkAnswer = postWorkAnswer::findOrFail($id);
         $postWorkAnswer->id_postWork = $request->input('id_postWork');
         $postWorkAnswer->form_array = $request->input('form_array');
-        $postWorkAnswer->conformity = $request->input('conformity');
         try {
             if ($postWorkAnswer->save()) {
                 return $postWorkAnswer;

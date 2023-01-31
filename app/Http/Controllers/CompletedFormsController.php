@@ -79,7 +79,7 @@ class CompletedFormsController extends Controller
 
     public function filter(Request $request)
     {
-        $query = postWorkAnswer::query();
+        $query = postWork::query();
 
         if ($request->has('created_at_start') && $request->has('created_at_end')) {
             $query->whereBetween('created_at', [
