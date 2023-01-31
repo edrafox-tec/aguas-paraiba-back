@@ -101,8 +101,7 @@ class CompletedFormsController extends Controller
         $id_sector = $request->input('id_sector');
         $postWork = DB::table('post_works')
             ->where('id_sector', $id_sector)
-            ->join('post_work_answers', 'post_work_answers.id_postWork', '=', 'id_postWork')
-            ->where('post_work_answers.conformity', 0)
+            ->where('conformity', null)
             ->get();
         return $postWork;
     }
