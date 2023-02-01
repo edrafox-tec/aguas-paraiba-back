@@ -51,10 +51,16 @@
         <!--Fist Table Head-->
         <table class="headForm">
             <tr>
-                <th><label>Setor:</label></th>
-                <td><label>{{$user->function}}</label></td>
-                <th><label>Responsavel:</label></th>
-                <td><label>{{$user->name}}</label></td>
+                @foreach ( $array as $item )
+                @foreach ( $item['AllAnswer'] as $themes )
+                @if ($themes['theme'] == 'Setor')
+                @foreach ($themes['answer'] as $answer )
+                        <th><label>Setor:</label></th>
+                            <td><label>{{$answer['answer']}}</label></td>
+                        @endforeach
+                    @endif
+                @endforeach
+            @endforeach
                 @foreach ( $array as $item )
                     @foreach ( $item['AllAnswer'] as $themes )
                         @if ($themes['theme'] == 'Data')
@@ -69,7 +75,7 @@
             <tr>
             @foreach ( $array as $item )
                 @foreach ( $item['AllAnswer'] as $themes )
-                    @if ($themes['theme'] == 'Equipe' || $themes['theme'] == 'Local da inspeção')
+                    @if ($themes['theme'] == 'Equipe' || $themes['theme'] == 'Local de inspeção')
                         @foreach ($themes['answer'] as $answer )
                             <th><label>{{$themes['theme']}}:</label></th>
                             <td><label>{{$answer['answer']}}</label></td>
@@ -114,7 +120,7 @@
             </thead>
             <tbody>
                 @foreach ($item['AllAnswer'] as $questions)
-                @if ($questions['theme'] !== 'Equipe' && $questions['theme'] !== 'Local da inspeção' && $questions['theme'] !==
+                @if ($questions['theme'] !== 'Equipe' && $questions['theme'] !== 'Local de inspeção' && $questions['theme'] !==
                 'Sobre os projetos e especificações' && $questions['theme'] !== 'Documentos de Referência/Anexos' &&
                 $questions['theme'] != 'Setor' && $questions['theme'] != 'Data' && $questions['theme'] !== 'Condições de clima' &&
                 $questions['theme'] !== 'Condições de Segurança das Adjacências' )        
@@ -122,7 +128,11 @@
                     <td style="width:30%"><label>{{$questions['theme']}}</label></td>
                     <td style="width:70%">
                         @foreach ($questions['answer'] as $answer )
+                        @if ($answer['type_question'] =='photo')
+                            <img src="{{$answer['answer']}}"/>
+                        @else
                         <label>{{$answer['answer']}}</label>
+                        @endif
                         @endforeach
                     </td>
                 </tr>
@@ -131,12 +141,29 @@
             </tbody>
             @endforeach
         </table>
+        @if ($title == 'Pós obra')
         <table style="width:100%">
             <tr>
-                <td><label>Assinatura:</label></td>
+                <td><label>Técnico de fiscalização: <br> {{$user->name}}</label></td>
                 <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
             </tr>
         </table>
+        @else
+        <table style="width:100%">
+            <tr>
+                <td><label>Responsavel de produção:</label></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+            </tr>
+            <tr>
+                <td><label>Tecnico de engenharia (CAP):</label></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+            </tr>
+            <tr>
+                <td><label>Técnico de fiscalização: <br> {{$user->name}}</label></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+            </tr>
+        </table>
+        @endif
     </div>
 </body>
 
