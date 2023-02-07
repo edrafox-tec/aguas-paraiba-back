@@ -93,6 +93,7 @@ class QuestionController extends Controller
         $questions->answerType = $request->input('answerType');
         $questions->description = $request->input('description');
         $questions->id_formTheme = $request->input('id_formTheme');
+        $questions->required = $request->input('required');
         try {
             if ($questions->save()) {
                 return $questions;
