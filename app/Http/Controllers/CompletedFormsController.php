@@ -88,12 +88,16 @@ class CompletedFormsController extends Controller
     }
 
     public function postWorkBySector(Request $request)
-    {
-        $id_sector = $request->input('id_sector');
-        $postWork = DB::table('post_works')
-            ->where('id_sector', $id_sector)
-            ->where('conformity', null)
-            ->get();
-        return $postWork;
-    }
+{
+    $id_sector = $request->input('id_sector');
+
+    $postWork = DB::table('post_works')
+        ->join('forms', 'post_works.id_form', '=', 'forms.id')
+        ->select('post_works.*', 'forms.*')
+        ->where('post_works.id_sector', $id_sector)
+        ->where('conformity', null)
+        ->get();
+
+    return $postWork;
+}
 }
