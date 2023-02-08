@@ -120,16 +120,27 @@ class Users extends Controller
     public function update($id, Request $request)
     {
         function firstname_lastnames($fullname)
-        {
-            $names = explode(' ', $fullname);
-            if (count($names) === 1) { // caso alguém tenha um só nome
-                return $names[0];
-            }
-            return $names[0] . '.' . $names[count($names) - 1];
+    {
+        $names = explode(' ', $fullname);
+        if (count($names) === 1) { // caso alguém tenha um só nome
+            return $names[0];
         }
-        $fullname = $request->input('name');
-        $firstname_lastname = firstname_lastnames($fullname);
+        return $names[0] . '.' . $names[count($names) - 1];
+    }
 
+    $fullname = $request->input('name');
+    $firstname_lastname = firstname_lastnames($fullname);
+    $nickname = $firstname_lastname;
+
+        // Verifica se o nickname já existe
+    while (User::where('nickname', $nickname)->first()) {
+        $nickname = $firstname_lastname . '_' . rand(1, 100);
+    }
+
+    // Verifica se o registration já existe
+    if (User::where('registration', $request->input('registration'))->first()) {
+        return 1062;
+    }
 
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
