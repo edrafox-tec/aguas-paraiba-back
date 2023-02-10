@@ -127,15 +127,21 @@
                 <tr>
                     <td style="width:30%"><label>{{$questions['theme']}}</label></td>
                     <td style="width:70%">
-                        @foreach ($questions['answer'] as $answer )
-                        @if ($answer['type_question'] =='photo')
-                            <img src="{{$answer['answer']}}"/>
+                      @php
+                        $showImage = true;
+                      @endphp
+                      @foreach ($questions['answer'] as $answer )
+                        @if ($answer['type_question'] =='photo' && $showImage)
+                          <img src="{{$answer['answer']}}"/>
+                          @php
+                            $showImage = false;
+                          @endphp
                         @else
-                        <label>{{$answer['answer']}}</label>
+                          <label>{{$answer['answer']}}</label>
                         @endif
-                        @endforeach
+                      @endforeach
                     </td>
-                </tr>
+                  </tr>
                 @endif
                 @endforeach
             </tbody>
