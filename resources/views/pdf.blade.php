@@ -137,7 +137,7 @@
                             $showImage = false;
                           @endphp
                         @else
-                          <label>{{$answer['answer']}}</label>
+                          {{-- <label>{{$answer['answer']}}</label> --}}
                         @endif
                       @endforeach
                     </td>
