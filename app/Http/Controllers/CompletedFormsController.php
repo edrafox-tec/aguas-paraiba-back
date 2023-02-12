@@ -79,30 +79,25 @@ class CompletedFormsController extends Controller
 
     public function filter(Request $request)
     {
-        $query = postWork::query();
+        $created_at_start = $request->input('created_at_start');
+        $created_at_end = $request->input('created_at_end');
+        $conformity = $request->input('conformity');
 
-        if ($request->has('created_at_start') && $request->has('created_at_end')) {
-            $query->whereBetween('created_at', [
-                $request->input('created_at_start'),
-                $request->input('created_at_end')
-            ]);
-        }
-
-        if ($request->has('conformity')) {
-            $query->where('conformity', $request->input('conformity'));
-        }
-        $results = $query->get();
-
-        return $results;
+        $ref = postWork::with('form')->whereBetween('created_at', [$created_at_start, $created_at_end])->where('conformity', $conformity)->get();
+        return $ref;
     }
 
     public function postWorkBySector(Request $request)
-    {
-        $id_sector = $request->input('id_sector');
-        $postWork = DB::table('post_works')
-            ->where('id_sector', $id_sector)
-            ->where('conformity', null)
-            ->get();
-        return $postWork;
-    }
+{
+    $id_sector = $request->input('id_sector');
+
+    $postWork = DB::table('post_works')
+        ->join('forms', 'post_works.id_form', '=', 'forms.id')
+        ->select('post_works.*', 'forms.*')
+        ->where('post_works.id_sector', $id_sector)
+        ->where('conformity', null)
+        ->get();
+
+    return $postWork;
+}
 }

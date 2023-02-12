@@ -22,15 +22,15 @@ class AuthController extends Controller
             $colaborador = User::where('nickname', $request->input('nickname'))->first();
             if ($colaborador->count() > 0) {
                 $array = array(
-                    "Auth"=>$this->respondWithToken($token),
-                    "User"=> $colaborador
+                    "Auth" => $this->respondWithToken($token),
+                    "User" => $colaborador
                 );
                 return $array;
             } else {
                 return 'Usuario ou senha incorretos!';
             }
+        }
     }
-}
 
     /**
      * Get the token array structure.

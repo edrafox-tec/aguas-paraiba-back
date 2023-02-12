@@ -26,38 +26,50 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
+{
+    function firstname_lastname($fullname)
     {
-        function firstname_lastname($fullname)
-        {
-            $names = explode(' ', $fullname);
-            if (count($names) === 1) { // caso alguém tenha um só nome
-                return $names[0];
-            }
-            return $names[0] . '.' . $names[count($names) - 1];
+        $names = explode(' ', $fullname);
+        if (count($names) === 1) { // caso alguém tenha um só nome
+            return $names[0];
         }
-        $fullname = $request->input('name');
-        $firstname_lastname = firstname_lastname($fullname);
-
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->registration = $request->input('registration');
-        $user->password = bcrypt($request->input('password'));
-        $user->function = $request->input('function');
-        $user->level = 0;
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
-        $user->activated = 0;
-        $user->nickname = $firstname_lastname;
-        $user->signature = $request->input('signature');
-        $user->id_sector = $request->input('id_sector');
-        try {
-            if ($user->save()) {
-                return $user;
-            };
-        } catch (ClientException $e) {
-            return $e->getMessage();
-        }
+        return $names[0] . '.' . $names[count($names) - 1];
     }
+
+    $fullname = $request->input('name');
+    $firstname_lastname = firstname_lastname($fullname);
+    $nickname = $firstname_lastname;
+    
+    // Verifica se o nickname já existe
+    while (User::where('nickname', $nickname)->first()) {
+        $nickname = $firstname_lastname . '_' . rand(1, 100);
+    }
+
+    // Verifica se o registration já existe
+    if (User::where('registration', $request->input('registration'))->first()) {
+        return 1062;
+    }
+
+    $user = new User();
+    $user->name = $request->input('name');
+    $user->registration = $request->input('registration');
+    $user->password = bcrypt($request->input('password'));
+    $user->function = $request->input('function');
+    $user->level = 0;
+    $user->email = $request->input('email');
+    $user->phone = $request->input('phone');
+    $user->activated = 0;
+    $user->nickname = $nickname;
+    $user->signature = $request->input('signature');
+    $user->id_sector = $request->input('id_sector');
+    try {
+        if ($user->save()) {
+            return $user;
+        };
+    } catch (ClientException $e) {
+        return $e->getMessage();
+    }
+}
 
     /**
      * Store a newly created resource in storage.
@@ -108,16 +120,27 @@ class Users extends Controller
     public function update($id, Request $request)
     {
         function firstname_lastnames($fullname)
-        {
-            $names = explode(' ', $fullname);
-            if (count($names) === 1) { // caso alguém tenha um só nome
-                return $names[0];
-            }
-            return $names[0] . '.' . $names[count($names) - 1];
+    {
+        $names = explode(' ', $fullname);
+        if (count($names) === 1) { // caso alguém tenha um só nome
+            return $names[0];
         }
-        $fullname = $request->input('name');
-        $firstname_lastname = firstname_lastnames($fullname);
+        return $names[0] . '.' . $names[count($names) - 1];
+    }
 
+    $fullname = $request->input('name');
+    $firstname_lastname = firstname_lastnames($fullname);
+    $nickname = $firstname_lastname;
+
+        // Verifica se o nickname já existe
+    while (User::where('nickname', $nickname)->first()) {
+        $nickname = $firstname_lastname . '_' . rand(1, 100);
+    }
+
+    // Verifica se o registration já existe
+    if (User::where('registration', $request->input('registration'))->first()) {
+        return 1062;
+    }
 
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
