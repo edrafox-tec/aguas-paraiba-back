@@ -72,28 +72,28 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/AnswerForForms/{id}', [PostWorkAnswerController::class, 'store']);
     Route::post('destroy/AnswerForForms/{id}', [PostWorkAnswerController::class, 'destroy']);
     Route::post('update/AnswerForForms/{id}', [PostWorkAnswerController::class, 'update']);
-
+    
     /*CRUD FORMS*/
     Route::post('add/form/', [FormController::class, 'create']);
     Route::post('show/form/', [FormController::class, 'show']);
     Route::post('store/form/{id}', [FormController::class, 'store']);
     Route::post('destroy/form/{id}', [FormController::class, 'destroy']);
     Route::post('update/form/{id}', [FormController::class, 'update']);
-
+    
     /*CRUD FORMTHEME*/
     Route::post('add/formTheme/', [FormThemeController::class, 'create']);
     Route::post('show/formTheme/', [FormThemeController::class, 'show']);
     Route::post('store/formTheme/{id}', [FormThemeController::class, 'store']);
     Route::post('destroy/formTheme/{id}', [FormThemeController::class, 'destroy']);
     Route::post('update/formTheme/{id}', [FormThemeController::class, 'update']);
-
+    
     /*CRUD ANSWER*/
     Route::post('add/answer/', [AnswerController::class, 'create']);
     Route::post('show/answer/', [AnswerController::class, 'show']);
     Route::post('store/answer/{id}', [AnswerController::class, 'store']);
     Route::post('destroy/answer/{id}', [AnswerController::class, 'destroy']);
     Route::post('update/answer/{id}', [AnswerController::class, 'update']);
-
+    
     /*CRUD QUESTION*/
     Route::post('add/question/', [QuestionController::class, 'create']);
     Route::post('show/question/', [QuestionController::class, 'show']);
@@ -115,3 +115,5 @@ Route::post('changeSignature/user/{id}', [Users::class, 'changeSignature']);
 Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'export']);
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
+
+Route::post('sendFile64', [PostWorkAnswerController::class, 'image64']);

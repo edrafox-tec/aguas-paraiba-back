@@ -8,7 +8,7 @@ storage/framework/views/*
 storage/logs/*
 .rr.yml
 rr
-vendor
+vendor-2
 
 # 2. Ignore common files/directories we don't need
 fly.toml
