@@ -9,7 +9,8 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use App\Models\postWork;
 use Excel;
-use Aws\S3\S3Client;
+//use Aws\S3\S3Client;
+use Illuminate\Support\Facades\Storage;
 
 class PostWorkAnswerController extends Controller
 {
@@ -30,30 +31,29 @@ class PostWorkAnswerController extends Controller
      */
     public function image64(Request $request){
         $base64Img = $request->input('base64Img');
-        $s3Client = S3Client::factory(array(
+        /*$s3Client = S3Client::factory(array(
             'region' => 'us-east-1',
             'version' => 'latest',
             'credentials' => array(
                 'key'    => 'AKIAQDDSEW63243IY5BP',
                 'secret' => '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',
             )
-        ));
+        ));*/
         if($request->has('base64Img') && strpos($base64Img,';base64')){
             // aqui faz a montagem do base64 para imagem
             $extension = explode('/', $base64Img);
             $extension = explode(';', $extension[1]);
             $extension = '.'.$extension[0];
-            $nameFile = bcrypt(time()).$extension;
+            $nameFile = time().$extension;
             $onlyCodeBase64 = explode(',',$base64Img);
             $file = $onlyCodeBase64[1];
             $arquive = base64_decode($file);
-           // dd($arquive);
-            $upload = $s3Client->upload('edralivery-images/aguas',$nameFile,$arquive,'public-read');
-            return $upload->get('ObjectURL');
-            // aqui envia pra S3 depois do arquivo $file definido
-            /*$arquive->storeAs('Aguas/', $nameFile, 's3');
-            dd($arquive);*/
-
+            Storage::disk('s3')->put('aguasParaiba/'.$nameFile,$arquive,'public');
+            try {   
+                return response()->json(['https://edralivery-images.s3.amazonaws.com/aguasParaiba/'.$nameFile]);
+            } catch (ClientException $e) {
+                return $e->getMessage();
+            }
         }else{
         return response()->json(['Tipo de arquivo não é base64']);
         }

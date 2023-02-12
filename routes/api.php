@@ -72,6 +72,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/AnswerForForms/{id}', [PostWorkAnswerController::class, 'store']);
     Route::post('destroy/AnswerForForms/{id}', [PostWorkAnswerController::class, 'destroy']);
     Route::post('update/AnswerForForms/{id}', [PostWorkAnswerController::class, 'update']);
+    Route::post('sendFile64', [PostWorkAnswerController::class, 'image64']);
     
     /*CRUD FORMS*/
     Route::post('add/form/', [FormController::class, 'create']);
@@ -116,4 +117,3 @@ Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'expo
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
 
-Route::post('sendFile64', [PostWorkAnswerController::class, 'image64']);
