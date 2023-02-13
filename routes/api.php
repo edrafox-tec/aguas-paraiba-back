@@ -67,7 +67,6 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('update/InformationForForms/{id}', [PostWorkController::class, 'update']);
 
     /*CRUD POST WORK ANSWERS*/
-    Route::post('add/AnswerForForms', [PostWorkAnswerController::class, 'create']);
     Route::post('show/AnswerForForms', [PostWorkAnswerController::class, 'show']);
     Route::post('store/AnswerForForms/{id}', [PostWorkAnswerController::class, 'store']);
     Route::post('destroy/AnswerForForms/{id}', [PostWorkAnswerController::class, 'destroy']);
@@ -101,7 +100,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/question/{id}', [QuestionController::class, 'store']);
     Route::post('destroy/question/{id}', [QuestionController::class, 'destroy']);
     Route::post('update/question/{id}', [QuestionController::class, 'update']);
-
+    
     /*CRUD SECTOR*/
     Route::post('add/sector/', [SectorController::class, 'create']);
     Route::post('store/sector/{id}', [SectorController::class, 'store']);
@@ -117,3 +116,5 @@ Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'expo
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
 
+
+Route::post('add/AnswerForForms', [PostWorkAnswerController::class, 'create']);

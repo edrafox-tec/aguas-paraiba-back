@@ -8,6 +8,7 @@ use App\Models\form;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use App\Models\postWork;
+use Aws\Api\Parser\JsonParser;
 use Excel;
 //use Aws\S3\S3Client;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,8 @@ class PostWorkAnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function image64(Request $request){
+    public function image64(Request $request)
+    {
         $base64Img = $request->input('base64Img');
         /*$s3Client = S3Client::factory(array(
             'region' => 'us-east-1',
@@ -39,30 +41,61 @@ class PostWorkAnswerController extends Controller
                 'secret' => 'enPhPfAAN4u78/ZGF/MjSokwa1pkY/0C+5RBDwlK',
             )
         ));*/
-        if($request->has('base64Img') && strpos($base64Img,';base64')){
+        if ($request->has('base64Img') && strpos($base64Img, ';base64')) {
             // aqui faz a montagem do base64 para imagem
             $extension = explode('/', $base64Img);
             $extension = explode(';', $extension[1]);
-            $extension = '.'.$extension[0];
-            $nameFile = time().$extension;
-            $onlyCodeBase64 = explode(',',$base64Img);
+            $extension = '.' . $extension[0];
+            $nameFile = time() . $extension;
+            $onlyCodeBase64 = explode(',', $base64Img);
             $file = $onlyCodeBase64[1];
             $arquive = base64_decode($file);
-            Storage::disk('s3')->put('aguasParaiba/'.$nameFile,$arquive,'public');
-            try {   
-                return response()->json(['https://edralivery-images.s3.amazonaws.com/aguasParaiba/'.$nameFile]);
+            Storage::disk('s3')->put('aguasParaiba/' . $nameFile, $arquive, 'public');
+            try {
+                return response()->json(['https://edralivery-images.s3.amazonaws.com/aguasParaiba/' . $nameFile]);
             } catch (ClientException $e) {
                 return $e->getMessage();
             }
-        }else{
-        return response()->json(['Tipo de arquivo não é base64']);
+        } else {
+            return response()->json(['Tipo de arquivo não é base64']);
         }
     }
     public function create(Request $request)
     {
+        $form = json_decode($request->input('form_array'));
+        foreach ($form[0]->Themes as $theme) {
+            
+            foreach ($theme->AllAnswer as $Answers) {
+                foreach ($Answers->answer as $answerType) {
+                    if ($answerType->type_question == 'photo') {
+                        $base64Img = $answerType->answer;
+                        if (strpos($base64Img, ';base64')) {
+                            // aqui faz a montagem do base64 para imagem
+                            $extension = explode('/', $base64Img);
+                            $extension = explode(';', $extension[1]);
+                            $extension = '.' . $extension[0];
+                            $nameFile = time() . $extension;
+                            $onlyCodeBase64 = explode(',', $base64Img);
+                            $file = $onlyCodeBase64[1];
+                            $arquive = base64_decode($file);
+                            Storage::disk('s3')->put('aguasParaiba/' . $nameFile, $arquive, 'public');
+                            try {
+                                $answerType->answer = $nameFile;
+                            } catch (ClientException $e) {
+                                return $e->getMessage();
+                            }
+                        } else {
+                            return response()->json(['Tipo de arquivo não é base64']);
+                        }
+                    }
+                    sleep(3);
+                }
+            }
+        }
         $postWorkAnswer = new postWorkAnswer;
         $postWorkAnswer->id_postWork = $request->input('id_postWork');
-        $postWorkAnswer->form_array = $request->input('form_array');
+        $postWorkAnswer->form_array = json_encode($form, JSON_UNESCAPED_UNICODE);
+
         try {
             if ($postWorkAnswer->save()) {
                 return $postWorkAnswer;

@@ -28,7 +28,7 @@ class PdfController extends Controller
         if ($array) {
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
-            return $pdf->setPaper('a4')->download($title . '-' . $user->name . '.pdf');
+            return $pdf->setPaper('a4')->download($PostWork->created_at.'_'.$user->function .'_'.$title.'_'.$user->nickname . '.pdf');
         } else {
             return 'Formulário corrompido';
         }

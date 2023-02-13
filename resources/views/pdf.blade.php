@@ -132,7 +132,7 @@
                       @endphp
                       @foreach ($questions['answer'] as $answer )
                         @if ($answer['type_question'] =='photo' && $showImage)
-                          <img src="{{$answer['answer']}}"/>
+                          <img src="https://edralivery-images.s3.amazonaws.com/aguasParaiba/{{$answer['answer']}}"/>
                           @php
                             $showImage = false;
                           @endphp
