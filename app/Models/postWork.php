@@ -15,7 +15,8 @@ class postWork extends Model
         'id_sector',
         'id_form',
         'id_user',
-        'conformity'
+        'conformity',
+        'observation'
     ];
     public function postWorkAnswer()
     {

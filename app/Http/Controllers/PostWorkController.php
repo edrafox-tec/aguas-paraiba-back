@@ -31,6 +31,7 @@ class PostWorkController extends Controller
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
         $postWork->conformity = $request->input('conformity');
+        $postWork->observation = $request->input('observation');
         try {
             if ($postWork->save()) {
                 return $postWork;
@@ -93,6 +94,7 @@ class PostWorkController extends Controller
         $postWork->id_form = $request->input('id_form');
         $postWork->id_user = $request->input('id_user');
         $postWork->conformity = $request->input('conformity');
+        $postWork->observation = $request->input('observation');
         try {
             if ($postWork->save()) {
                 return $postWork;

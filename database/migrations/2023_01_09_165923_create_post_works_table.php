@@ -21,6 +21,7 @@ class CreatePostWorksTable extends Migration
             $table->unsignedBigInteger('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->integer('conformity')->nullable();
+            $table->string('observation')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
