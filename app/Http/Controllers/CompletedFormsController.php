@@ -40,18 +40,16 @@ class CompletedFormsController extends Controller
     }
     //Rota para usuario
 
-    public function storeUser($id_form, Request $request)
+    public function storeUser($id_user, Request $request)
 {
-    $id_user = $request->input('id_user');
-
     $postWorks = postWork::where('id_user', $id_user)
-        ->where('id_form', $id_form)
         ->join('forms', 'post_works.id_form', '=', 'forms.id')
         ->select('post_works.*', 'forms.*')
         ->get();
 
     return $postWorks->toArray();
 }
+
 
 
     public function showUser($id, Request $request)
