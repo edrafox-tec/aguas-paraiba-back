@@ -73,7 +73,8 @@ class PostWorkAnswerController extends Controller
                             $extension = explode('/', $base64Img);
                             $extension = explode(';', $extension[1]);
                             $extension = '.' . $extension[0];
-                            $nameFile = time() . $extension;
+                            $nameFile = time() . rand(0, 999999) . $extension;
+                            //$nameFile = time() . $extension;
                             $onlyCodeBase64 = explode(',', $base64Img);
                             $file = $onlyCodeBase64[1];
                             $arquive = base64_decode($file);
