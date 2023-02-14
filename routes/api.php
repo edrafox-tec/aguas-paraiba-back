@@ -27,7 +27,7 @@ use App\Http\Controllers\Users;
 
 Route::middleware('auth:sanctum')->get(
     '/user',
-
+    
     function (Request $request) {
         return $request->user();
     }
@@ -36,20 +36,20 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('add/user/', [Users::class, 'create']);
 
 Route::group(['middleware' => ['apiJwt']], function () {
-
+    
     /*CRUD USER*/
     Route::post('show/user/', [Users::class, 'show']);
     Route::post('store/user/{id}', [Users::class, 'store']);
     Route::post('destroy/user/{id}', [Users::class, 'destroy']);
     Route::post('update/user/{id}', [Users::class, 'update']);
     Route::post('update/status/{id}', [Users::class, 'updateStatus']);
-
+    
     /*CRUD COMPLETED FORM ADM*/
     Route::post('store/CompForm/{id}', [CompletedFormsController::class, 'store']);
     Route::post('show/CompForm/{id}', [CompletedFormsController::class, 'show']);
     Route::post('perDate/CompForm/{id}', [CompletedFormsController::class, 'perDate']);
     Route::post('perSector/CompForm/{id}', [CompletedFormsController::class, 'perSector']);
-
+    
     /*CRUD COMPLETED FORM USER*/
     Route::post('storeUser/CompForm/{id}', [CompletedFormsController::class, 'storeUser']);
     Route::post('answer/CompForm/{id}', [CompletedFormsController::class, 'showUser']);
@@ -58,20 +58,21 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('perSectorUser/CompForm/{id}', [CompletedFormsController::class, 'perSectorUser']);
     Route::post('filter/CompForm', [CompletedFormsController::class, 'filter']);
     Route::post('postWorkBySector/CompForm', [CompletedFormsController::class, 'postWorkBySector']);
-
+    
     /*CRUD POST WORK INFOS*/
     Route::post('add/InformationForForms', [PostWorkController::class, 'create']);
     Route::post('show/InformationForForms', [PostWorkController::class, 'show']);
     Route::post('store/InformationForForms/{id}', [PostWorkController::class, 'store']);
     Route::post('destroy/InformationForForms/{id}', [PostWorkController::class, 'destroy']);
     Route::post('update/InformationForForms/{id}', [PostWorkController::class, 'update']);
-
+    
     /*CRUD POST WORK ANSWERS*/
     Route::post('show/AnswerForForms', [PostWorkAnswerController::class, 'show']);
     Route::post('store/AnswerForForms/{id}', [PostWorkAnswerController::class, 'store']);
     Route::post('destroy/AnswerForForms/{id}', [PostWorkAnswerController::class, 'destroy']);
     Route::post('update/AnswerForForms/{id}', [PostWorkAnswerController::class, 'update']);
     Route::post('sendFile64', [PostWorkAnswerController::class, 'image64']);
+    Route::post('add/AnswerForForms', [PostWorkAnswerController::class, 'create']);
     
     /*CRUD FORMS*/
     Route::post('add/form/', [FormController::class, 'create']);
@@ -116,5 +117,3 @@ Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'expo
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
 
-
-Route::post('add/AnswerForForms', [PostWorkAnswerController::class, 'create']);
