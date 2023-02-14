@@ -62,9 +62,8 @@ class PostWorkAnswerController extends Controller
     }
     public function create(Request $request)
     {
-        $form = json_decode($request->input('form_array'));
+        $form = $request->input('form_array');
         foreach ($form[0]->Themes as $theme) {
-            
             foreach ($theme->AllAnswer as $Answers) {
                 foreach ($Answers->answer as $answerType) {
                     if ($answerType->type_question == 'photo') {
