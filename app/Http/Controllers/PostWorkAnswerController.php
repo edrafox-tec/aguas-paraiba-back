@@ -63,47 +63,60 @@ class PostWorkAnswerController extends Controller
     public function create(Request $request)
     {
         $form = json_decode($request->input('form_array'));
-        foreach ($form[0]->Themes as $theme) {
-            
-            foreach ($theme->AllAnswer as $Answers) {
-                foreach ($Answers->answer as $answerType) {
-                    if ($answerType->type_question == 'photo') {
-                        $base64Img = $answerType->answer;
-                        if (strpos($base64Img, ';base64')) {
-                            // aqui faz a montagem do base64 para imagem
-                            $extension = explode('/', $base64Img);
-                            $extension = explode(';', $extension[1]);
-                            $extension = '.' . $extension[0];
-                            $nameFile = time() . $extension;
-                            $onlyCodeBase64 = explode(',', $base64Img);
-                            $file = $onlyCodeBase64[1];
-                            $arquive = base64_decode($file);
-                            Storage::disk('s3')->put('aguasParaiba/' . $nameFile, $arquive, 'public');
-                            try {
-                                $answerType->answer = $nameFile;
-                            } catch (ClientException $e) {
-                                return $e->getMessage();
+        $base64Images = $request->input('base64_images');
+        $maxBatchSize = 10;
+        $numBatches = ceil(count($base64Images) / $maxBatchSize);
+        $batchIndex = 0;
+    
+        while ($batchIndex < $numBatches) {
+            $batch = array_slice($base64Images, $batchIndex * $maxBatchSize, $maxBatchSize);
+            $imagesProcessed = 0;
+    
+            foreach ($form[0]->Themes as $theme) {
+                foreach ($theme->AllAnswer as $Answers) {
+                    foreach ($Answers->answer as $answerType) {
+                        if ($answerType->type_question == 'photo') {
+                            $base64Img = $batch[$imagesProcessed];
+                            if (strpos($base64Img, ';base64')) {
+                                // aqui faz a montagem do base64 para imagem
+                                $extension = explode('/', $base64Img);
+                                $extension = explode(';', $extension[1]);
+                                $extension = '.' . $extension[0];
+                                $nameFile = time() . $extension;
+                                $onlyCodeBase64 = explode(',', $base64Img);
+                                $file = $onlyCodeBase64[1];
+                                $arquive = base64_decode($file);
+                                Storage::disk('s3')->put('aguasParaiba/' . $nameFile, $arquive, 'public');
+                                try {
+                                    $answerType->answer = $nameFile;
+                                } catch (ClientException $e) {
+                                    return $e->getMessage();
+                                }
+                            } else {
+                                return response()->json(['Tipo de arquivo não é base64']);
                             }
-                        } else {
-                            return response()->json(['Tipo de arquivo não é base64']);
+                            $imagesProcessed++;
                         }
                     }
-                    sleep(3);
                 }
             }
-        }
-        $postWorkAnswer = new postWorkAnswer;
-        $postWorkAnswer->id_postWork = $request->input('id_postWork');
-        $postWorkAnswer->form_array = json_encode($form, JSON_UNESCAPED_UNICODE);
-
-        try {
-            if ($postWorkAnswer->save()) {
-                return $postWorkAnswer;
-            };
-        } catch (ClientException $e) {
-            return $e->getMessage();
+    
+            $postWorkAnswer = new postWorkAnswer;
+            $postWorkAnswer->id_postWork = $request->input('id_postWork');
+            $postWorkAnswer->form_array = json_encode($form, JSON_UNESCAPED_UNICODE);
+    
+            try {
+                if ($postWorkAnswer->save()) {
+                    return $postWorkAnswer;
+                };
+            } catch (ClientException $e) {
+                return $e->getMessage();
+            }
+    
+            $batchIndex++;
         }
     }
+    
 
     /**
      * Store a newly created resource in storage.
