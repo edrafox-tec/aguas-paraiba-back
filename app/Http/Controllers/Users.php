@@ -138,10 +138,6 @@ class Users extends Controller
             $nickname = $firstname_lastname . '_' . rand(1, 100);
         }
 
-        // Verifica se o registration já existe
-        if (User::where('registration', $request->input('registration'))->first()) {
-            return 1062;
-        }
 
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
