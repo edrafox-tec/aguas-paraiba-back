@@ -26,51 +26,51 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-{
-    function firstname_lastname($fullname)
     {
-        $names = explode(' ', $fullname);
-        if (count($names) === 1) { // caso alguém tenha um só nome
-            return $names[0];
+        function firstname_lastname($fullname)
+        {
+            $names = explode(' ', $fullname);
+            if (count($names) === 1) { // caso alguém tenha um só nome
+                return $names[0];
+            }
+            return $names[0] . '.' . $names[count($names) - 1];
         }
-        return $names[0] . '.' . $names[count($names) - 1];
-    }
 
-    $fullname = $request->input('name');
-    $firstname_lastname = firstname_lastname($fullname);
-    $nickname = $firstname_lastname;
-    
-    // Verifica se o nickname já existe
-    while (User::where('nickname', $nickname)->first()) {
-        $nickname = $firstname_lastname . '_' . rand(1, 100);
-    }
+        $fullname = $request->input('name');
+        $firstname_lastname = firstname_lastname($fullname);
+        $nickname = $firstname_lastname;
 
-    // Verifica se o registration já existe
-    if (User::where('registration', $request->input('registration'))->first()) {
-        return 1062;
-    }
+        // Verifica se o nickname já existe
+        while (User::where('nickname', $nickname)->first()) {
+            $nickname = $firstname_lastname . '_' . rand(1, 100);
+        }
 
-    $user = new User();
-    $user->name = $request->input('name');
-    $user->registration = $request->input('registration');
-    $user->password = bcrypt($request->input('password'));
-    $user->function = $request->input('function');
-    $user->level = 0;
-    $user->email = $request->input('email');
-    $user->phone = $request->input('phone');
-    $user->activated = 0;
-    $user->nickname = $nickname;
-    $user->signature = $request->input('signature');
-    $user->id_sector = $request->input('id_sector');
-    $user->type_function = $request->input('type_function');
-    try {
-        if ($user->save()) {
-            return $user;
-        };
-    } catch (ClientException $e) {
-        return $e->getMessage();
+        // Verifica se o registration já existe
+        if (User::where('registration', $request->input('registration'))->first()) {
+            return 1062;
+        }
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->registration = $request->input('registration');
+        $user->password = bcrypt($request->input('password'));
+        $user->function = $request->input('function');
+        $user->level = 0;
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->activated = 0;
+        $user->nickname = $nickname;
+        $user->signature = $request->input('signature');
+        $user->id_sector = $request->input('id_sector');
+        $user->type_function = $request->input('type_function');
+        try {
+            if ($user->save()) {
+                return $user;
+            };
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
     }
-}
 
     /**
      * Store a newly created resource in storage.
@@ -121,27 +121,27 @@ class Users extends Controller
     public function update($id, Request $request)
     {
         function firstname_lastnames($fullname)
-    {
-        $names = explode(' ', $fullname);
-        if (count($names) === 1) { // caso alguém tenha um só nome
-            return $names[0];
+        {
+            $names = explode(' ', $fullname);
+            if (count($names) === 1) { // caso alguém tenha um só nome
+                return $names[0];
+            }
+            return $names[0] . '.' . $names[count($names) - 1];
         }
-        return $names[0] . '.' . $names[count($names) - 1];
-    }
 
-    $fullname = $request->input('name');
-    $firstname_lastname = firstname_lastnames($fullname);
-    $nickname = $firstname_lastname;
+        $fullname = $request->input('name');
+        $firstname_lastname = firstname_lastnames($fullname);
+        $nickname = $firstname_lastname;
 
         // Verifica se o nickname já existe
-    while (User::where('nickname', $nickname)->first()) {
-        $nickname = $firstname_lastname . '_' . rand(1, 100);
-    }
+        while (User::where('nickname', $nickname)->first()) {
+            $nickname = $firstname_lastname . '_' . rand(1, 100);
+        }
 
-    // Verifica se o registration já existe
-    if (User::where('registration', $request->input('registration'))->first()) {
-        return 1062;
-    }
+        // Verifica se o registration já existe
+        if (User::where('registration', $request->input('registration'))->first()) {
+            return 1062;
+        }
 
         $user = user::findOrFail($id);
         $user->name = $request->input('name');
@@ -156,6 +156,7 @@ class Users extends Controller
         $user->activated = $request->input('activated');
         $user->nickname = $firstname_lastname;
         $user->id_sector = $request->input('id_sector');
+        $user->type_function = $request->input('type_function');
         try {
             if ($user->save()) {
                 return $user;
@@ -193,6 +194,32 @@ class Users extends Controller
     {
         $user = user::where('id', $id)->first();
         $user->activated = $request->input('activated');
+        try {
+            if ($user->save()) {
+                return $user;
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function listUsersByTypeFunction(Request $request)
+{
+    $type_function = $request->input('type_function');
+    $users = User::where('type_function', $type_function)->select('id', 'name')->get();
+
+    if ($users->isEmpty()) {
+        return response()->json(['message' => 'No users found with this type of function'], 404);
+    }
+
+    return response()->json($users, 200);
+}
+
+
+    public function updateTypeFunction($id, Request $request)
+    {
+        $user = user::where('id', $id)->first();
+        $user->type_function = $request->input('type_function');
         try {
             if ($user->save()) {
                 return $user;

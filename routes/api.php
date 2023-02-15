@@ -43,6 +43,8 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('destroy/user/{id}', [Users::class, 'destroy']);
     Route::post('update/user/{id}', [Users::class, 'update']);
     Route::post('update/status/{id}', [Users::class, 'updateStatus']);
+    Route::post('listUsersByTypeFunction/user', [Users::class, 'listUsersByTypeFunction']);
+    Route::post('updateTypeFunction/user/{id}', [Users::class, 'updateTypeFunction']);
     
     /*CRUD COMPLETED FORM ADM*/
     Route::post('store/CompForm/{id}', [CompletedFormsController::class, 'store']);
