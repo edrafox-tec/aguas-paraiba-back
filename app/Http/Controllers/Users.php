@@ -62,6 +62,7 @@ class Users extends Controller
     $user->nickname = $nickname;
     $user->signature = $request->input('signature');
     $user->id_sector = $request->input('id_sector');
+    $user->type_function = $request->input('type_function');
     try {
         if ($user->save()) {
             return $user;

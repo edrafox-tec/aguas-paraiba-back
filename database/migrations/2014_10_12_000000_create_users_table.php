@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('activated')->default(0);
             $table->string('nickname');
             $table->string('signature');
+            $table->integer('type_function')->nullable();
             $table->unsignedBigInteger('id_sector')->unsigned()->nullable();
             $table->foreign('id_sector')->references('id')->on('sectors');
             $table->rememberToken();

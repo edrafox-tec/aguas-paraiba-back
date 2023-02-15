@@ -30,7 +30,8 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'activated',
         'nickname',
-        'id_sector'
+        'id_sector',
+        'type_function'
     ];
     
     // email → string
