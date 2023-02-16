@@ -29,7 +29,11 @@ class CompletedFormsController extends Controller
         $fim = $request->input('final_date');
 
        // $ref = postWork::where('id', $id)->first()->id_form;
-        return postWork::with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->get();
+       if($inicio != $fim){
+           return postWork::with('form')->whereBetween('created_at', [$inicio, $fim])->get();
+       }else{
+           return postWork::with('form')->where('created_at', $inicio)->get();
+       }
     }
 
     public function perSector($id, Request $request) //Adm
