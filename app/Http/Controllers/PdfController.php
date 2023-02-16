@@ -25,13 +25,14 @@ class PdfController extends Controller
         $teste = json_decode($formAnswer->form_array, true);
         $array = $teste[0]['Themes'];
         //return $array;
-        if ($array) {
+        if (count($array) > 0) {
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
-            return $pdf->setPaper('a4')->download($PostWork->created_at.'_'.$user->function .'_'.$title.'_'.$user->nickname . '.pdf');
+            return $pdf->setPaper('a4')->stream($PostWork->created_at.'_'.$user->function .'_'.$title.'_'.$user->nickname . '.pdf');
         } else {
             return 'Formulário corrompido';
         }
+        //return 'ola mundo 8';
     }
     public function indexBase64($id, Request $request)
     {

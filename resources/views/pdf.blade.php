@@ -127,18 +127,15 @@
                 <tr>
                     <td style="width:30%"><label>{{$questions['theme']}}</label></td>
                     <td style="width:70%">
-                      @php
-                        $showImage = true;
-                      @endphp
                       @foreach ($questions['answer'] as $answer )
-                        @if ($answer['type_question'] =='photo' && $showImage)
+                        @if ($answer['type_question'] == 'photo')
                           <img src="https://edralivery-images.s3.amazonaws.com/aguasParaiba/{{$answer['answer']}}"/>
-                          @php
-                            $showImage = false;
-                          @endphp
+                        @elseif ($answer['type_question'] == 'date')
+                          <label>{{date('d/m/Y h:m',strtotime($answer['answer']))}}</label>
                         @else
-                          {{-- <label>{{$answer['answer']}}</label> --}}
+                          <label>{!!nl2br($answer['answer'])!!}</label>
                         @endif
+
                       @endforeach
                     </td>
                   </tr>
