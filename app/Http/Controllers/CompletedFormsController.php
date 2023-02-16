@@ -23,13 +23,13 @@ class CompletedFormsController extends Controller
         return form::findOrFail($ref)->with('postWorkAnswer')->get();
     }
 
-    public function perDate($id, Request $request) //Adm
+    public function perDate(Request $request) //Adm
     {
         $inicio = $request->input('initial_date');
         $fim = $request->input('final_date');
 
-        $ref = postWork::where('id', $id)->first()->id_form;
-        return form::findOrFail($ref)->with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->get();
+       // $ref = postWork::where('id', $id)->first()->id_form;
+        return postWork::with('postWorkAnswer')->whereBetween('created_at', [$inicio, $fim])->get();
     }
 
     public function perSector($id, Request $request) //Adm

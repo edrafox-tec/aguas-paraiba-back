@@ -49,7 +49,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     /*CRUD COMPLETED FORM ADM*/
     Route::post('store/CompForm/{id}', [CompletedFormsController::class, 'store']);
     Route::post('show/CompForm/{id}', [CompletedFormsController::class, 'show']);
-    Route::post('perDate/CompForm/{id}', [CompletedFormsController::class, 'perDate']);
+    Route::post('perDate/CompForm/', [CompletedFormsController::class, 'perDate']);
     Route::post('perSector/CompForm/{id}', [CompletedFormsController::class, 'perSector']);
     
     /*CRUD COMPLETED FORM USER*/
