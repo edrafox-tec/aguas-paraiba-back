@@ -129,7 +129,7 @@
                     <td style="width:70%">
                       @foreach ($questions['answer'] as $answer )
                         @if ($answer['type_question'] == 'photo')
-                          <img src="https://edralivery-images.s3.amazonaws.com/aguasParaiba/{{$answer['answer']}}"/>
+                          <img style="margin-top:2%;width: 75px;height:100px" src="https://edralivery-images.s3.amazonaws.com/aguasParaiba/{{$answer['answer']}}"/>
                         @elseif ($answer['type_question'] == 'date')
                           <label>{{date('d/m/Y h:m',strtotime($answer['answer']))}}</label>
                         @else
