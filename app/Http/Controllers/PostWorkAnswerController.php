@@ -88,18 +88,6 @@ class PostWorkAnswerController extends Controller
                     if ($answerType->type_question === 'technician') {
                         $tec = $Answers->answer;
                     }
-                    // if ($Answers->type_question === 'technician') {
-                    //     $technicianName = $Answers->answer;
-                    //     $user = User::where('name', $technicianName)->first();
-                    //     if ($user) {
-                    //         $data = array(
-                    //             'name' => $user->name,
-                    //             'email' => $user->email,
-                    //             'message' => 'Hello, ' . $user->name . '! This is an email sent from Laravel.'
-                    //         );
-                    //         Mail::to($user->email)->send(new MailSend($data));
-                    //     }
-                    // }
                 }
             }
         }
@@ -108,18 +96,31 @@ class PostWorkAnswerController extends Controller
         $postWorkAnswer->form_array = json_encode($form, JSON_UNESCAPED_UNICODE);
 
         try {
+            // if ($postWorkAnswer->save()) {
+            //     if ($tec != '') {
+            //         $technician = user::where('name', $tec[0]->answer)->first();
+            //         Mail::send(
+            //             'mail.sendmail',
+            //             ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id],
+            //             function ($m) use ($technician) {
+            //                 $m->subject('Novo fomulário!'); /// assunto do email 
+            //                 $m->to($technician->email);
+            //             }
+            //         );
+            //         return $postWorkAnswer;
             if ($postWorkAnswer->save()) {
                 if ($tec != '') {
                     $technician = user::where('name', $tec[0]->answer)->first();
+                    $id_postWork = $request->input('id_postWork');
+                    $pdf_url = url('/api/pdf/' . $id_postWork);
                     Mail::send(
                         'mail.sendmail',
-                        ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id],
+                        ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id, 'pdf_url' => $pdf_url],
                         function ($m) use ($technician) {
-                            $m->subject('ola mundo'); /// assunto do email 
+                            $m->subject('Novo formulário!'); /// assunto do email 
                             $m->to($technician->email);
                         }
                     );
-                    //return $technician->email; /// retornar o email do lucas.portela@aguasdoparaiba.com.br
                     return $postWorkAnswer;
                 }else{
                     return $postWorkAnswer;
