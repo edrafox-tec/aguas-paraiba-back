@@ -8,6 +8,9 @@ use App\Models\form;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use App\Models\postWork;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailSend;
+use App\Models\User;
 use Aws\Api\Parser\JsonParser;
 use Excel;
 //use Aws\S3\S3Client;
@@ -60,6 +63,7 @@ class PostWorkAnswerController extends Controller
             return response()->json(['Tipo de arquivo não é base64']);
         }
     }
+
     public function create(Request $request)
     {
         $form = json_decode($request->input('form_array'));
@@ -88,6 +92,18 @@ class PostWorkAnswerController extends Controller
                             return response()->json(['Tipo de arquivo não é base64']);
                         }
                     }
+                    // if ($Answers->type_question === 'technician') {
+                    //     $technicianName = $Answers->answer;
+                    //     $user = User::where('name', $technicianName)->first();
+                    //     if ($user) {
+                    //         $data = array(
+                    //             'name' => $user->name,
+                    //             'email' => $user->email,
+                    //             'message' => 'Hello, ' . $user->name . '! This is an email sent from Laravel.'
+                    //         );
+                    //         Mail::to($user->email)->send(new MailSend($data));
+                    //     }
+                    // }
                 }
             }
         }
