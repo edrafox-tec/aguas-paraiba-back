@@ -46,12 +46,13 @@ class CompletedFormsController extends Controller
 
     public function storeUser($id_user, Request $request)
 {
-    $postWorks = postWork::where('id_user', $id_user)
+    /*$postWorks = postWork::where('id_user', $id_user)
         ->join('forms', 'post_works.id_form', '=', 'forms.id')
         ->select('post_works.*', 'forms.*')
         ->get();
 
-    return $postWorks->toArray();
+    return $postWorks->toArray();*/
+    return postWork::with('form')->where('id_user',$id_user)->get();
 }
 
 

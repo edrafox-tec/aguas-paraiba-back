@@ -13,6 +13,7 @@ use App\Http\Controllers\SectorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------

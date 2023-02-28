@@ -155,11 +155,11 @@
         <table style="width:100%">
             <tr>
                 <td><label>Responsavel de produção:</label></td>
-                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+                <td></td>
             </tr>
             <tr>
                 <td><label>Tecnico de engenharia (CAP):</label></td>
-                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+                <td></td>
             </tr>
             <tr>
                 <td><label>Técnico de fiscalização: <br> {{$user->name}}</label></td>
