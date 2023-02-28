@@ -120,3 +120,14 @@ Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'expo
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
 
+Route::get('testEmail', function (){
+    Mail::send('welcome',['Array'=>'Eloquent'],
+        function($m){
+
+                $m->from('jorge.filho@aguasdoparaiba.com.br','Teste email aguas');
+                $m->subject('ola mundo');
+                $m->to('lucas.portela@aguasdoparaiba.com.br');
+        }
+    );
+});
+
