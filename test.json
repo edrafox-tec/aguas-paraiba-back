@@ -1,0 +1,995 @@
+[
+    {
+        "Form": "Rec Vala",
+        "id_post_work": 3,
+        "Themes": [
+            {
+                "MasterTheme": "Informações Gerais",
+                "AllAnswer": [
+                    {
+                        "theme": "Setor",
+                        "id_theme": 74,
+                        "answer": [
+                            {
+                                "answer": "PERDAS",
+                                "value_question": null,
+                                "type_question": "sector"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Supervisor",
+                        "id_theme": 75,
+                        "answer": [
+                            {
+                                "answer": "Teste Engenharia Sup",
+                                "value_question": null,
+                                "type_question": "supervisor"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Técnico",
+                        "id_theme": 76,
+                        "answer": [
+                            {
+                                "answer": "Teste Técnico do GSO",
+                                "value_question": null,
+                                "type_question": "technician"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Equipe",
+                        "id_theme": 77,
+                        "answer": [
+                            {
+                                "answer": "Jzsnjsns",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Local da inspeção",
+                        "id_theme": 78,
+                        "answer": [
+                            {
+                                "answer": "Hzhzhsbsb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Tipo de via",
+                        "id_theme": 79,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Arterial"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sobre os projetos e especificações",
+                        "id_theme": 80,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Projeto executivo"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Documentos de Referência\/Anexos",
+                        "id_theme": 81,
+                        "answer": [
+                            {
+                                "answer": "Hxhxbxb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Condições de clima",
+                        "id_theme": 82,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Ensolarado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Condições de Segurança das Adjacências",
+                        "id_theme": 83,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Risco elevado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Data",
+                        "id_theme": 100,
+                        "answer": [
+                            {
+                                "answer": "2023-02-12T15:59:00-03:00",
+                                "value_question": null,
+                                "type_question": "date"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Sobre a Demolição e Escavação",
+                "AllAnswer": [
+                    {
+                        "theme": "Tipo de revestimento",
+                        "id_theme": 84,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Asfalto"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Demolição do revestimento",
+                        "id_theme": 85,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Solapamento de vase do revestimento"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Afastamento de escavação (cm)",
+                        "id_theme": 86,
+                        "answer": [
+                            {
+                                "answer": "Xhxbdb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Geometria da vala: Largura(m)",
+                        "id_theme": 87,
+                        "answer": [
+                            {
+                                "answer": "Bxbxxb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Geometria da vala: Profundidade(m)",
+                        "id_theme": 88,
+                        "answer": [
+                            {
+                                "answer": "Bzbxbs",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Geometria da vala: Comprimento(m)",
+                        "id_theme": 89,
+                        "answer": [
+                            {
+                                "answer": "Nnxn",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Solo predominante",
+                        "id_theme": 90,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Pedregulhoso"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Condição de resistência do solo de fundo",
+                        "id_theme": 91,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Normal"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Estabilidade lateral",
+                        "id_theme": 92,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Desbar. no fundo"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Surgência",
+                        "id_theme": 93,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Sim, vazamento de esgoto"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Rachão de fundo",
+                        "id_theme": 94,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Realizado plenamente"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Escoramento",
+                        "id_theme": 95,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Sim, mas não instalado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Esgotamento da Água\/esgoto",
+                        "id_theme": 96,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Não foi possível constatar"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Regularização e Compactação do Fundo",
+                        "id_theme": 97,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Compactação Adequada"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Limpeza de fundo",
+                        "id_theme": 98,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Regular"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Tipo e Boa Qualidade dos Materiais",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 101,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não usado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 102,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Inadequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 103,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 104,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 105,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Inadequado"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Condição de Umidade",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 106,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Úmido"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 107,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Encharcado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 108,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Úmido"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 109,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Seco"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Úmido"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 110,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Ótimo"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Eq. Compact. e Postura operador",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 111,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Rolo"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 112,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Placa"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 113,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Rolo"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 114,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Soq."
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 115,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Comp."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Teste de penetração em relação à área",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 116,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 117,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não usado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 118,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 119,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequado"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 120,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não usado"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Controle de espessura",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 121,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Incorreto"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Correto"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 122,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Correto"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não control."
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 123,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Correto"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 124,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Correto"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não control."
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 125,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Incorreto"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Correto"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Número de passadas",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 126,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Igual"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Maior"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Nenhuma"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Menor"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 127,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Nenhuma"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Maior"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 128,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Igual"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 129,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Maior"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 130,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Menor"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Abrangência da área durante a compactação",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 131,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não ab."
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Regular"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 132,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Regular"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 133,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Pouca"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 134,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Não ab."
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 135,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Adequada"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Sobreposição entre passadas",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 136,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Regular"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 137,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Pouca"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 138,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Regular"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 139,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Pouca"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 140,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Regular"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Tempo de execução",
+                "AllAnswer": [
+                    {
+                        "theme": "Berço",
+                        "id_theme": 141,
+                        "answer": [
+                            {
+                                "answer": "Shsgegeg",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Proteção",
+                        "id_theme": 142,
+                        "answer": [
+                            {
+                                "answer": "Bsbsbs",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Sub-base",
+                        "id_theme": 143,
+                        "answer": [
+                            {
+                                "answer": "Bzhhzsb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Base",
+                        "id_theme": 144,
+                        "answer": [
+                            {
+                                "answer": "Zbxbdb",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "theme": "Preench.",
+                        "id_theme": 145,
+                        "answer": [
+                            {
+                                "answer": "Hshdhdh",
+                                "value_question": null,
+                                "type_question": "text"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Interferências",
+                "AllAnswer": [
+                    {
+                        "theme": "Tipo de interferência",
+                        "id_theme": 146,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Tubo de gás"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Outras tubulações"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Animais"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Detritos"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Envolvimento dos profissionais no processo",
+                "AllAnswer": [
+                    {
+                        "theme": "Classificação",
+                        "id_theme": 147,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Recomendo treinamento"
+                            },
+                            {
+                                "value_question": null,
+                                "type_question": "checkbox",
+                                "answer": "Pouco"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Conformidade",
+                "AllAnswer": [
+                    {
+                        "theme": "Classificação",
+                        "id_theme": 148,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "radio",
+                                "answer": "Em conformidade"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Fatos relevantes",
+                "AllAnswer": [
+                    {
+                        "theme": "Fatos",
+                        "id_theme": 149,
+                        "answer": [
+                            {
+                                "answer": "Hshsbddb",
+                                "value_question": null,
+                                "type_question": "longtext"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "MasterTheme": "Fotos",
+                "AllAnswer": [
+                    {
+                        "theme": "Fotos",
+                        "id_theme": 169,
+                        "answer": [
+                            {
+                                "value_question": null,
+                                "type_question": "zero",
+                                "answer": "1677611113370752.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Date": "28\/02\/2023, 16:05:10"
+    }
+]

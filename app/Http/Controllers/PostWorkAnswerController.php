@@ -36,14 +36,6 @@ class PostWorkAnswerController extends Controller
     public function image64(Request $request)
     {
         $base64Img = $request->input('base64Img');
-        /*$s3Client = S3Client::factory(array(
-            'region' => 'us-east-1',
-            'version' => 'latest',
-            'credentials' => array(
-                'key'    => 'AKIAQDDSEW63243IY5BP',
-                'secret' => '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',
-            )
-        ));*/
         if ($request->has('base64Img') && strpos($base64Img, ';base64')) {
             // aqui faz a montagem do base64 para imagem
             $extension = explode('/', $base64Img);
@@ -67,6 +59,7 @@ class PostWorkAnswerController extends Controller
     public function create(Request $request)
     {
         $form = json_decode($request->input('form_array'));
+        $tec = '';
         foreach ($form[0]->Themes as $theme) {
             foreach ($theme->AllAnswer as $Answers) {
                 foreach ($Answers->answer as $answerType) {
@@ -92,6 +85,9 @@ class PostWorkAnswerController extends Controller
                             return response()->json(['Tipo de arquivo não é base64']);
                         }
                     }
+                    if ($answerType->type_question === 'technician') {
+                        $tec = $Answers->answer;
+                    }
                     // if ($Answers->type_question === 'technician') {
                     //     $technicianName = $Answers->answer;
                     //     $user = User::where('name', $technicianName)->first();
@@ -113,7 +109,22 @@ class PostWorkAnswerController extends Controller
 
         try {
             if ($postWorkAnswer->save()) {
-                return $postWorkAnswer;
+                if ($tec != '') {
+                    $technician = user::where('name', $tec[0]->answer)->first();
+                    Mail::send(
+                        'mail.sendmail',
+                        ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id],
+                        function ($m) use ($technician) {
+                            $m->subject('ola mundo'); /// assunto do email 
+                            $m->to($technician->email);
+                        }
+                    );
+                    //return $technician->email; /// retornar o email do lucas.portela@aguasdoparaiba.com.br
+                    return $postWorkAnswer;
+                }else{
+                    return $postWorkAnswer;
+                }
+
             };
         } catch (ClientException $e) {
             return $e->getMessage();
