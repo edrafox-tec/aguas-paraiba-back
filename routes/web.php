@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('envio-email', function () {
+
+    $user = new stdClass();
+    $user->name = 'Vitor';
+    $user->email = 'pioneirovitor@gmail.com';
+
+    //return new \App\Mail\mailsend($user);
+    Mail::send(new \App\Mail\mailsend($user));
 });
