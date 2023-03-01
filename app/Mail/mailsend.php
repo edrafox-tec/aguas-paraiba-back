@@ -33,7 +33,8 @@ class mailsend extends Mailable
         $this->subject('Novo formulário Aguas do Paraíba!');
         $this->to($this->user->email, $this->user->name);
         return $this->markdown('mail.sendmail', [
-            'user' => $this->user
+            'name' => $this->user->name,
+            'pdf_url' => $this->user->pdf_url
         ]);
     }
 }

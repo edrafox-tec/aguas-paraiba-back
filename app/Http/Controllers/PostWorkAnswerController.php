@@ -13,8 +13,9 @@ use App\Mail\MailSend;
 use App\Models\User;
 use Aws\Api\Parser\JsonParser;
 use Excel;
-//use Aws\S3\S3Client;
+
 use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class PostWorkAnswerController extends Controller
 {
@@ -99,33 +100,36 @@ class PostWorkAnswerController extends Controller
             // if ($postWorkAnswer->save()) {
             //     if ($tec != '') {
             //         $technician = user::where('name', $tec[0]->answer)->first();
+            //         $id_postWork = $request->input('id_postWork');
+            //         $pdf_url = url('/api/pdf/' . $id_postWork);
             //         Mail::send(
             //             'mail.sendmail',
-            //             ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id],
+            //             ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id, 'pdf_url' => $pdf_url],
             //             function ($m) use ($technician) {
-            //                 $m->subject('Novo fomulário!'); /// assunto do email 
+            //                 $m->subject('Novo formulário!'); /// assunto do email 
             //                 $m->to($technician->email);
             //             }
             //         );
             //         return $postWorkAnswer;
+            //     }else{
+            //         return $postWorkAnswer;
+            //     }
+
+            // };
             if ($postWorkAnswer->save()) {
                 if ($tec != '') {
-                    $technician = user::where('name', $tec[0]->answer)->first();
+                    $technician = User::where('name', $tec[0]->answer)->first();
                     $id_postWork = $request->input('id_postWork');
                     $pdf_url = url('/api/pdf/' . $id_postWork);
-                    Mail::send(
-                        'mail.sendmail',
-                        ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id, 'pdf_url' => $pdf_url],
-                        function ($m) use ($technician) {
-                            $m->subject('Novo formulário!'); /// assunto do email 
-                            $m->to($technician->email);
-                        }
-                    );
+                    $user = new stdClass();
+                    $user->name = $technician->name;
+                    $user->email = $technician->email;
+                    $user->pdf_url = $pdf_url;
+                    Mail::to($technician->email)->send(new mailsend($user));
                     return $postWorkAnswer;
-                }else{
+                } else {
                     return $postWorkAnswer;
                 }
-
             };
         } catch (ClientException $e) {
             return $e->getMessage();
