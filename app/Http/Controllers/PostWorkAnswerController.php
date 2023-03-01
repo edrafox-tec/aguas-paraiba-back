@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use App\Models\postWork;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MailSend;
+use App\Mail\mailsend;
 use App\Models\User;
 use Aws\Api\Parser\JsonParser;
 use Excel;
