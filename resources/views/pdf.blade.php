@@ -43,7 +43,7 @@
                     src='https://www.revistameucondominio.com.br/wp-content/uploads/2022/04/logo-aguas-do-paraiba.png'>
             </th>
             <th style='width:40%;background:white'>
-                <div class="text-center" style="background-color: #033D60;color:white;width:400px;padding:1%">
+                <div class="text-center" style="font-family: -apple-system;background-color: #033D60;color:white;width:400px;padding:1%">
                     <h3>Relátorio {{$title}}</h3>
                 </div>
             </th>
@@ -113,11 +113,11 @@
         <!-- Table Answer -->
         <table style='width:100%'>
             @foreach ( $array as $item )
-            <thead>
+            <tbody>
                 <tr>
                     <th colspan="2"><label>{{$item['MasterTheme']}}</label></th>
                 </tr>
-            </thead>
+            </tbody>
             <tbody>
                 @foreach ($item['AllAnswer'] as $questions)
                 @if ($questions['theme'] !== 'Equipe' && $questions['theme'] !== 'Local de inspeção' && $questions['theme'] !==
@@ -125,7 +125,7 @@
                 $questions['theme'] != 'Setor' && $questions['theme'] != 'Data' && $questions['theme'] !== 'Condições de clima' &&
                 $questions['theme'] !== 'Condições de Segurança das Adjacências' )        
                 <tr>
-                    <td style="width:30%"><label>{{$questions['theme']}}</label></td>
+                    <td style="width:30%;background: rgb(235, 235, 235);;font-weight:bold"><label>{{$questions['theme']}}</label></td>
                     <td style="width:70%">
                       @foreach ($questions['answer'] as $answer )
                         @if ($answer['type_question'] == 'photo')

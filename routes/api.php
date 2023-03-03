@@ -120,3 +120,10 @@ Route::get('postWorkAnswer/export/{id}', [PostWorkAnswerController::class, 'expo
 Route::get('pdf/{id}', [PdfController::class, 'index']);
 Route::post('pdf64/{id}', [PdfController::class, 'indexBase64']);
 
+
+// test email
+Route::get('testMail', Mail::send('welcome',['name'=>'test','pdf_url'=>'testPdf'],
+function ($m){
+    $m->subject('Teste');
+    $m->to('edrafoxdev@gmail.com');
+}));
