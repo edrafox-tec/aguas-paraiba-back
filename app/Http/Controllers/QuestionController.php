@@ -102,6 +102,17 @@ class QuestionController extends Controller
             return $e->getMessage();
         }
     }
+    public function position(Request $request){
+        $questionPosition = question::where($request->input('id'),'id')->first();
+        $questionPosition->position = $request->input('position');
+        try {
+            if ($questionPosition->save()) {
+                return $questionPosition;
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

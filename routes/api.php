@@ -90,7 +90,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/formTheme/{id}', [FormThemeController::class, 'store']);
     Route::post('destroy/formTheme/{id}', [FormThemeController::class, 'destroy']);
     Route::post('update/formTheme/{id}', [FormThemeController::class, 'update']);
-    Route::post('update/positin/formTheme/', [FormThemeController::class, 'position']);
+    Route::post('update/position/formTheme', [FormThemeController::class, 'position']);
     
     /*CRUD ANSWER*/
     Route::post('add/answer/', [AnswerController::class, 'create']);
@@ -105,6 +105,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/question/{id}', [QuestionController::class, 'store']);
     Route::post('destroy/question/{id}', [QuestionController::class, 'destroy']);
     Route::post('update/question/{id}', [QuestionController::class, 'update']);
+    Route::post('update/position/question', [QuestionController::class, 'position']);
     
     /*CRUD SECTOR*/
     Route::post('add/sector/', [SectorController::class, 'create']);
