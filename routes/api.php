@@ -90,6 +90,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/formTheme/{id}', [FormThemeController::class, 'store']);
     Route::post('destroy/formTheme/{id}', [FormThemeController::class, 'destroy']);
     Route::post('update/formTheme/{id}', [FormThemeController::class, 'update']);
+    Route::post('update/positin/formTheme/', [FormThemeController::class, 'position']);
     
     /*CRUD ANSWER*/
     Route::post('add/answer/', [AnswerController::class, 'create']);

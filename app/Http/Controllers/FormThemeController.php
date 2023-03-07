@@ -98,6 +98,17 @@ class FormThemeController extends Controller
             return $e->getMessage();
         }
     }
+    public function position(Request $request){
+        $formPosition = formTheme::where($request->input('id'),'id')->first();
+        $formPosition->position = $request->input('position');
+        try {
+            if ($formPosition->save()) {
+                return $formPosition;
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

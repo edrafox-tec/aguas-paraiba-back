@@ -16,6 +16,7 @@ class CreateFormThemesTable extends Migration
         Schema::create('form_themes', function (Blueprint $table) {
             $table->id();
             $table->string('theme');
+            $table->string('position');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('id_form')->unsigned()->nullable();
             $table->foreign('id_form')->references('id')->on('forms');
