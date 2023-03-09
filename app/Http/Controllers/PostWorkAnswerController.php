@@ -135,6 +135,23 @@ class PostWorkAnswerController extends Controller
             return $e->getMessage();
         }
     }
+    public function sing(Request $request)
+    {
+        $sing = user::where('name', $request->input('name'))->first();
+        $form = postWorkAnswer::where('id', $request->input('id'))->first();
+        if ($sing->id_sector == '14') {
+            $form->sing_engen = $sing->signature;
+        } else {
+            $form->sing_prod = $sing->signature;
+        }
+        try {
+            if ($form->save()) {
+                return response()->json(['Assinado com sucesso!']);
+            }
+        } catch (ClientException $e) {
+            return $e->getMessage();
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

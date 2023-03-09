@@ -18,7 +18,10 @@ class CreateFormsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->string('sing_prod')->nullable();
+            $table->string('sing_prod')->nullable();
+            $table->string('sing_fiscal')->nullable();
+            $table->string('sing_engen')->nullable();
             $table->unsignedBigInteger('id_sector')->unsigned()->nullable();
             $table->foreign('id_sector')->references('id')->on('sectors');
         });

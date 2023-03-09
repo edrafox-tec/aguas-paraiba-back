@@ -76,6 +76,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('update/AnswerForForms/{id}', [PostWorkAnswerController::class, 'update']);
     Route::post('sendFile64', [PostWorkAnswerController::class, 'image64']);
     Route::post('add/AnswerForForms', [PostWorkAnswerController::class, 'create']);
+    Route::post('sing', [PostWorkAnswerController::class, 'sing']);
     
     /*CRUD FORMS*/
     Route::post('add/form/', [FormController::class, 'create']);

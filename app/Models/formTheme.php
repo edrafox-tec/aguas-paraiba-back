@@ -19,7 +19,7 @@ class formTheme extends Model
     ];
     public function questions()
     {
-        return $this->hasMany(question::class, 'id_formTheme')->with('answers');
+        return $this->hasMany(question::class, 'id_formTheme')->orderBy('position','asc')->with('answers');
     }
     public function quetionsAnswer()
     {

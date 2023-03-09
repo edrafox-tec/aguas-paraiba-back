@@ -23,11 +23,13 @@ class PdfController extends Controller
         $user = user::where('id', $PostWork->id_user)->withTrashed()->first();
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array, true);
+        $formulario = form::where('id',$PostWork->id_form)->first();
+        //dd($formulario['sing_fiscal']);
         $array = $teste[0]['Themes'];
         //return $array;
         if (count($array) > 0) {
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer'));
             return $pdf->setPaper('a4')->download($PostWork->created_at.'_'.$user->function .'_'.$title.'_'.$user->nickname . '.pdf');
         } else {
             return 'Formulário corrompido';
@@ -37,15 +39,17 @@ class PdfController extends Controller
     public function indexBase64($id, Request $request)
     {
         $formAnswer = postWorkAnswer::where('id_postWork', $id)->first();
-        $PostWork = postWork::where('id', $formAnswer->id_postWork)->withTrashed()->first();
-        $user = user::where('id', $PostWork->id_user)->first();
+        $PostWork = postWork::where('id', $formAnswer->id_postWork)->first();
+        $user = user::where('id', $PostWork->id_user)->withTrashed()->first();
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array, true);
+        $formulario = form::where('id',$PostWork->id_form)->first();
+        //dd($formulario['sing_fiscal']);
         $array = $teste[0]['Themes'];
-        if ($array) {
-
+        //return $array;
+        if (count($array) > 0) {
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user'));
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer'));
             $file = $pdf->setPaper('a4')->download($title . '-' . $user->name . '.pdf');
             $pdfView = chunk_split(base64_encode($file));
             $arr = [];

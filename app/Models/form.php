@@ -16,7 +16,10 @@ class form extends Model
     protected $fillable = [
         'name',
         'description',
-        'id_sector'
+        'id_sector',
+        'sing_prod',
+        'sing_fiscal',
+        'sing_engen',
     ];
     public function formThemes()
     {

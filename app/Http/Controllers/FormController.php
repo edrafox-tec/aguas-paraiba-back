@@ -29,6 +29,9 @@ class FormController extends Controller
         $form->name = $request->input('name');
         $form->description = $request->input('description');
         $form->id_sector = $request->input('id_sector');
+        $form->sing_prod = $request->input('sing_prod');
+        $form->sing_fiscal = $request->input('sing_fiscal');
+        $form->sing_engen = $request->input('sing_engen');
         try {
             if ($form->save()) {
                 return $form;
@@ -90,6 +93,9 @@ class FormController extends Controller
         $form->name = $request->input('name');
         $form->description = $request->input('description');
         $form->id_sector = $request->input('id_sector');
+        $form->sing_prod = $request->input('sing_prod');
+        $form->sing_fiscal = $request->input('sing_fiscal');
+        $form->sing_engen = $request->input('sing_engen');
         try {
             if ($form->save()) {
                 return $form;

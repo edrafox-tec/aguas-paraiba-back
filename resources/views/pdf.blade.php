@@ -144,26 +144,27 @@
             </tbody>
             @endforeach
         </table>
-        @if ($title == 'Pós obra')
+        @if ($formulario['sing_prod'] === 1)
+        <table style="width:100%">
+            <tr>
+                <td><label>Responsavel Produção: <br> </label></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$formAnswer->sing_prod}}"></td>
+            </tr>
+        </table>
+        @endif
+        @if ($formulario['sing_fiscal'] === 1)
         <table style="width:100%">
             <tr>
                 <td><label>Técnico de fiscalização: <br> {{$user->name}}</label></td>
                 <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
             </tr>
         </table>
-        @else
+        @endif
+        @if ($formulario['sing_engen'] === 1)
         <table style="width:100%">
             <tr>
-                <td><label>Responsavel de produção:</label></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td><label>Tecnico de engenharia (CAP):</label></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><label>Técnico de fiscalização: <br> {{$user->name}}</label></td>
-                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$user->signature}}"></td>
+                <td><img style="margin-left:2%;width:6%;height:10%;transform: rotate(90deg)" src="{{$formAnswer->sing_engen}}"></td>
             </tr>
         </table>
         @endif

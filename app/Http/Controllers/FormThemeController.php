@@ -62,7 +62,7 @@ class FormThemeController extends Controller
      */
     public function show()
     {
-        $formTheme = formTheme::get();
+        $formTheme = formTheme::orderBy('position','asc')->get();
         return $formTheme;
     }
 
@@ -99,7 +99,7 @@ class FormThemeController extends Controller
         }
     }
     public function position(Request $request){
-        $formPosition = formTheme::where($request->input('id'),'id')->first();
+        $formPosition = formTheme::where('id',$request->input('id'))->first();
         $formPosition->position = $request->input('position');
         try {
             if ($formPosition->save()) {

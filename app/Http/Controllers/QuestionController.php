@@ -64,7 +64,7 @@ class QuestionController extends Controller
      */
     public function show()
     {
-        $questions = question::get();
+        $questions = question::orderBy('position','asc')->get();
         return $questions;
     }
 
@@ -103,7 +103,7 @@ class QuestionController extends Controller
         }
     }
     public function position(Request $request){
-        $questionPosition = question::where($request->input('id'),'id')->first();
+        $questionPosition = question::where('id',$request->input('id'))->first();
         $questionPosition->position = $request->input('position');
         try {
             if ($questionPosition->save()) {
