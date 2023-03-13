@@ -16,4 +16,8 @@ class assing extends Model
         'signed',
         'id',
     ];
+    public function form()
+    {
+        return $this->hasMany(postWork::class, 'id', 'postworkAnswer')->with('form');
+    }
 }

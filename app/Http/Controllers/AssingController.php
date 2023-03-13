@@ -35,7 +35,7 @@ class AssingController extends Controller
      */
     public function store(Request $request)
     {
-        $forms = assing::where('user_id', $request->input('user_id'))->where('signed',0)->get();
+        $forms = assing::where('user_id', $request->input('user_id'))->where('signed',0)->with('form')->get();
         return $forms;
     }
 

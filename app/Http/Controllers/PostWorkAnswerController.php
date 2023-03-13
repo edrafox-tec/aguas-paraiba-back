@@ -149,7 +149,12 @@ class PostWorkAnswerController extends Controller
         }
         try {
             if ($form->save()) {
-                return response()->json(['Assinado com sucesso!']);
+                $updateSing = assing::where('postworkAnswer',$form->id_postWork)->where('user_id',$sing->id)->first();
+                $updateSing->signed = 1;
+                if($updateSing->save()){
+                    return response()->json(['Assinado com sucesso!']);
+                }
+
             }
         } catch (ClientException $e) {
             return $e->getMessage();

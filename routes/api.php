@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\AssingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompletedFormsController;
 use App\Http\Controllers\FormController;
@@ -115,7 +116,7 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('update/sector/{id}', [SectorController::class, 'update']);
 
     /*CRUD SIGNATURE*/
-    Route::post('seach/sing/', [SectorController::class, 'store']);
+    Route::post('seach/sing/', [AssingController::class, 'store']);
 });
 
 Route::post('show/sector/', [SectorController::class, 'show']);
