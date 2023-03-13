@@ -49,12 +49,21 @@ class Users extends Controller
         if (User::where('registration', $request->input('registration'))->first()) {
             return 1062;
         }
-
+        $function = '';
+        if($request->input('type_function') == 1){
+            $function = 'Supervisor';
+        }
+        if($request->input('type_function') == 2){
+            $function = 'Técnico';
+        }
+        if($request->input('type_function') == 3){
+            $function = 'Fiscal';
+        }
         $user = new User();
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
         $user->password = bcrypt($request->input('password'));
-        $user->function = $request->input('function');
+        $user->function = $function;
         $user->level = 0;
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
@@ -140,12 +149,22 @@ class Users extends Controller
 
 
         $user = user::findOrFail($id);
+        $function = '';
+        if($request->input('type_function') == 1){
+            $function = 'Supervisor';
+        }
+        if($request->input('type_function') == 2){
+            $function = 'Técnico';
+        }
+        if($request->input('type_function') == 3){
+            $function = 'Fiscal';
+        }
         $user->name = $request->input('name');
         $user->registration = $request->input('registration');
         if ($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
-        $user->function = $request->input('function');
+        $user->function = $function;
         $user->level = $request->input('level');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');

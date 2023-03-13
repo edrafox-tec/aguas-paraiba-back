@@ -113,6 +113,9 @@ Route::group(['middleware' => ['apiJwt']], function () {
     Route::post('store/sector/{id}', [SectorController::class, 'store']);
     Route::post('destroy/sector/{id}', [SectorController::class, 'destroy']);
     Route::post('update/sector/{id}', [SectorController::class, 'update']);
+
+    /*CRUD SIGNATURE*/
+    Route::post('seach/sing/', [SectorController::class, 'store']);
 });
 
 Route::post('show/sector/', [SectorController::class, 'show']);

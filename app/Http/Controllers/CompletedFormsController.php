@@ -9,7 +9,7 @@ use App\Models\postWorkAnswer;
 use App\Models\question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User;
 class CompletedFormsController extends Controller
 {
     public function store($id, Request $request) //Adm
@@ -46,13 +46,12 @@ class CompletedFormsController extends Controller
 
     public function storeUser($id_user, Request $request)
 {
-    /*$postWorks = postWork::where('id_user', $id_user)
-        ->join('forms', 'post_works.id_form', '=', 'forms.id')
-        ->select('post_works.*', 'forms.*')
-        ->get();
-
-    return $postWorks->toArray();*/
-    return postWork::with('form')->where('id_user',$id_user)->get();
+    $user = user::where('id',$id_user)->first();
+    if($user->type_function != 3){
+        return postWork::with('form')->where('id_sector',$user->id_sector)->get();
+    }else{
+        return postWork::with('form')->where('id_user',$id_user)->get();
+    }
 }
 
 

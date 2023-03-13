@@ -23,7 +23,7 @@ class form extends Model
     ];
     public function formThemes()
     {
-        return $this->hasMany(formTheme::class, 'id_form')->with('questions')->orderBy('position','asc');
+        return $this->hasMany(formTheme::class, 'id_form')->orderBy('position','asc')->with('questions')->orderBy('position','asc');
     }
     public function postWorkAnswer()
     {

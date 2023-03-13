@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 use App\Models\postWork;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\mailsend;
+use App\Models\assing;
 use App\Models\User;
 use Aws\Api\Parser\JsonParser;
 use Excel;
 
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Style\Supervisor;
 use stdClass;
 
 class PostWorkAnswerController extends Controller
@@ -61,6 +63,7 @@ class PostWorkAnswerController extends Controller
     {
         $form = json_decode($request->input('form_array'));
         $tec = '';
+        $supervisor = '';
         foreach ($form[0]->Themes as $theme) {
             foreach ($theme->AllAnswer as $Answers) {
                 foreach ($Answers->answer as $answerType) {
@@ -89,6 +92,9 @@ class PostWorkAnswerController extends Controller
                     if ($answerType->type_question === 'technician') {
                         $tec = $Answers->answer;
                     }
+                    if ($answerType->type_question === 'supervisor') {
+                        $supervisor = $Answers->answer;
+                    }
                 }
             }
         }
@@ -97,39 +103,36 @@ class PostWorkAnswerController extends Controller
         $postWorkAnswer->form_array = json_encode($form, JSON_UNESCAPED_UNICODE);
 
         try {
-            // if ($postWorkAnswer->save()) {
-            //     if ($tec != '') {
-            //         $technician = user::where('name', $tec[0]->answer)->first();
-            //         $id_postWork = $request->input('id_postWork');
-            //         $pdf_url = url('/api/pdf/' . $id_postWork);
-            //         Mail::send(
-            //             'mail.sendmail',
-            //             ['name' =>$technician->name, 'idForm'=>$postWorkAnswer->id, 'pdf_url' => $pdf_url],
-            //             function ($m) use ($technician) {
-            //                 $m->subject('Novo formulário!'); /// assunto do email 
-            //                 $m->to($technician->email);
-            //             }
-            //         );
-            //         return $postWorkAnswer;
-            //     }else{
-            //         return $postWorkAnswer;
-            //     }
-
-            // };
             if ($postWorkAnswer->save()) {
+                $id_postWork = $request->input('id_postWork');
+                $pdf_url = url('/api/pdf/' . $id_postWork);
                 if ($tec != '') {
                     $technician = User::where('name', $tec[0]->answer)->first();
-                    $id_postWork = $request->input('id_postWork');
-                    $pdf_url = url('/api/pdf/' . $id_postWork);
+                    $bdTec = new assing;
+                    $bdTec->user = $technician->name;
+                    $bdTec->user_id = $technician->id;
+                    $bdTec->postworkAnswer = $request->input('id_postWork');
+                    $bdTec->save();
                     $user = new stdClass();
                     $user->name = $technician->name;
                     $user->email = $technician->email;
                     $user->pdf_url = $pdf_url;
                     Mail::to($technician->email)->send(new mailsend($user));
-                    return $postWorkAnswer;
-                } else {
-                    return $postWorkAnswer;
                 }
+                if ($supervisor != '') {
+                    $supervision = User::where('name', $supervisor[0]->answer)->first();
+                    $bdSup = new assing;
+                    $bdSup->user = $supervision->name;
+                    $bdSup->user_id = $supervision->id;
+                    $bdSup->postworkAnswer = $request->input('id_postWork');
+                    $bdSup->save();
+                    $user = new stdClass();
+                    $user->name = $supervision->name;
+                    $user->email = $supervision->email;
+                    $user->pdf_url = $pdf_url;
+                    Mail::to($supervision->email)->send(new mailsend($user));
+                }
+                return $postWorkAnswer;
             };
         } catch (ClientException $e) {
             return $e->getMessage();
