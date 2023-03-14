@@ -25,12 +25,8 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array, true);
         $formulario = form::where('id',$PostWork->id_form)->first();
-        //dd($PostWork->id);
         $assing = assing::where('postworkAnswer',$PostWork->id)->get();
-        //dd($assing);
-        //dd($formulario['sing_fiscal']);
         $array = $teste[0]['Themes'];
-        //return $array;
         if (count($array) > 0) {
             $title = $teste[0]['Form'];
             $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer','assing'));
@@ -48,12 +44,11 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array, true);
         $formulario = form::where('id',$PostWork->id_form)->first();
-        //dd($formulario['sing_fiscal']);
+        $assing = assing::where('postworkAnswer',$PostWork->id)->get();
         $array = $teste[0]['Themes'];
-        //return $array;
         if (count($array) > 0) {
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer'));
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer','assing'));
             $file = $pdf->setPaper('a4')->download($title . '-' . $user->name . '.pdf');
             $pdfView = chunk_split(base64_encode($file));
             $arr = [];
