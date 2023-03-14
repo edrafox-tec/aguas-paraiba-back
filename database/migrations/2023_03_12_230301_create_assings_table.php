@@ -19,6 +19,7 @@ class CreateAssingsTable extends Migration
             $table->string('user_id');
             $table->string('postworkAnswer');
             $table->integer('signed')->default(0);
+            $table->integer('level_user');
             $table->timestamps();
             $table->softDeletes();
         });

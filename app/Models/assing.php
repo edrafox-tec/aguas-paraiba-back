@@ -14,6 +14,7 @@ class assing extends Model
         'user_id',
         'postworkAnswer',
         'signed',
+        'level_user',
         'id',
     ];
     public function form()

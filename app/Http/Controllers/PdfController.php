@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\assing;
 use App\Models\form;
 use App\Models\User;
 use App\Models\postWork;
@@ -24,12 +25,15 @@ class PdfController extends Controller
         $convertido = json_encode($formAnswer->form_array);
         $teste = json_decode($formAnswer->form_array, true);
         $formulario = form::where('id',$PostWork->id_form)->first();
+        //dd($PostWork->id);
+        $assing = assing::where('postworkAnswer',$PostWork->id)->get();
+        //dd($assing);
         //dd($formulario['sing_fiscal']);
         $array = $teste[0]['Themes'];
         //return $array;
         if (count($array) > 0) {
             $title = $teste[0]['Form'];
-            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer'));
+            $pdf = PDF::loadView('pdf', compact('array', 'title', 'user','formulario','formAnswer','assing'));
             return $pdf->setPaper('a4')->download($PostWork->created_at.'_'.$user->function .'_'.$title.'_'.$user->nickname . '.pdf');
         } else {
             return 'Formulário corrompido';

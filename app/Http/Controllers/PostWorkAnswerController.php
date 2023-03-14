@@ -62,8 +62,7 @@ class PostWorkAnswerController extends Controller
     public function create(Request $request)
     {
         $form = json_decode($request->input('form_array'));
-        $tec = '';
-        $supervisor = '';
+        $tec = [];
         foreach ($form[0]->Themes as $theme) {
             foreach ($theme->AllAnswer as $Answers) {
                 foreach ($Answers->answer as $answerType) {
@@ -90,10 +89,8 @@ class PostWorkAnswerController extends Controller
                         }
                     }
                     if ($answerType->type_question === 'technician') {
-                        $tec = $Answers->answer;
-                    }
-                    if ($answerType->type_question === 'supervisor') {
-                        $supervisor = $Answers->answer;
+                        $technician = $Answers->answer;
+                        array_push($tec,$technician);
                     }
                 }
             }
@@ -106,32 +103,22 @@ class PostWorkAnswerController extends Controller
             if ($postWorkAnswer->save()) {
                 $id_postWork = $request->input('id_postWork');
                 $pdf_url = url('/api/pdf/' . $id_postWork);
-                if ($tec != '') {
-                    $technician = User::where('name', $tec[0]->answer)->first();
-                    $bdTec = new assing;
-                    $bdTec->user = $technician->name;
-                    $bdTec->user_id = $technician->id;
-                    $bdTec->postworkAnswer = $request->input('id_postWork');
-                    $bdTec->save();
-                    $user = new stdClass();
-                    $user->name = $technician->name;
-                    $user->email = $technician->email;
-                    $user->pdf_url = $pdf_url;
-                    Mail::to($technician->email)->send(new mailsend($user));
-                }
-                if ($supervisor != '') {
-                    $supervision = User::where('name', $supervisor[0]->answer)->first();
-                    $bdSup = new assing;
-                    $bdSup->user = $supervision->name;
-                    $bdSup->user_id = $supervision->id;
-                    $bdSup->postworkAnswer = $request->input('id_postWork');
-                    $bdSup->save();
-                    $user = new stdClass();
-                    $user->name = $supervision->name;
-                    $user->email = $supervision->email;
-                    $user->pdf_url = $pdf_url;
-                    Mail::to($supervision->email)->send(new mailsend($user));
-                }
+                if (count($tec) > 0) {
+                    foreach($tec as $name){
+                        $technician = User::where('name', $name[0]->answer)->first();
+                        $bdTec = new assing;
+                        $bdTec->user = $technician->name;
+                        $bdTec->user_id = $technician->id;
+                        $bdTec->level_user = $technician->id_sector;
+                        $bdTec->postworkAnswer = $request->input('id_postWork');
+                        $bdTec->save();
+                        $user = new stdClass();
+                        $user->name = $technician->name;
+                        $user->email = $technician->email;
+                        $user->pdf_url = $pdf_url;
+                        Mail::to($technician->email)->send(new mailsend($user));
+                    }
+                };
                 return $postWorkAnswer;
             };
         } catch (ClientException $e) {

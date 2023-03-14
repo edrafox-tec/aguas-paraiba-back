@@ -6,9 +6,11 @@ storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
+*.env*
 .rr.yml
 rr
-vendor-2
+vendor
+
 # 2. Ignore common files/directories we don't need
 fly.toml
 .vscode
