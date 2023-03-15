@@ -11,6 +11,7 @@ use App\Models\postWork;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\mailsend;
 use App\Models\assing;
+use App\Models\sector;
 use App\Models\User;
 use Aws\Api\Parser\JsonParser;
 use Excel;
@@ -63,6 +64,7 @@ class PostWorkAnswerController extends Controller
     {
         $form = json_decode($request->input('form_array'));
         $tec = [];
+        $sector = '';
         foreach ($form[0]->Themes as $theme) {
             foreach ($theme->AllAnswer as $Answers) {
                 foreach ($Answers->answer as $answerType) {
@@ -92,6 +94,9 @@ class PostWorkAnswerController extends Controller
                         $technician = $Answers->answer;
                         array_push($tec,$technician);
                     }
+                    if ($answerType->type_question === 'sector') {
+                        $sector = $Answers->answer;
+                    }
                 }
             }
         }
@@ -103,6 +108,14 @@ class PostWorkAnswerController extends Controller
             if ($postWorkAnswer->save()) {
                 $id_postWork = $request->input('id_postWork');
                 $pdf_url = url('/api/pdf/' . $id_postWork);
+                
+                if($sector != ''){
+                    $sectorChange = sector::where('name',$sector[0]->answer)->first();
+                    $Post = postWork::where('id',$id_postWork)->first();
+                    $id_sector = $sectorChange->id;
+                    $Post->id_sector = $id_sector;
+                    $Post->save();
+                }
                 if (count($tec) > 0) {
                     foreach($tec as $name){
                         $technician = User::where('name', $name[0]->answer)->first();

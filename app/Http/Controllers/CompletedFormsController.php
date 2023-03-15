@@ -49,8 +49,9 @@ class CompletedFormsController extends Controller
     $user = user::where('id',$id_user)->first();
     if($user->type_function != 3){
         return postWork::with('form')->where('id_sector',$user->id_sector)->get();
-    }else{
-        return postWork::with('form')->where('id_user',$id_user)->get();
+    }
+    else{
+        return postWork::with('form')->get();
     }
 }
 
